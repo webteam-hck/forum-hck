@@ -24,7 +24,6 @@
             --danger: #ff5555;
             --warning: #ffaa00;
             --role-owner: #ff00ff;
-            --role-admin: #ff00ff;
             --role-tech: #00ffff;
             --role-seo: #ffff00;
             --role-moder: #ff8800;
@@ -123,11 +122,6 @@
             background: rgba(255, 0, 255, 0.15); 
             border-color: var(--role-owner); 
             color: var(--role-owner); 
-        }
-        .role-admin { 
-            background: rgba(255, 0, 255, 0.15); 
-            border-color: var(--role-admin); 
-            color: var(--role-admin); 
         }
         .role-tech { 
             background: rgba(0, 255, 255, 0.15); 
@@ -1512,7 +1506,7 @@
             }
         };
 
-        // Исправленная загрузка аватара
+        // ИСПРАВЛЕННАЯ загрузка аватара
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
             if (!currentUser) return;
             
@@ -1527,8 +1521,10 @@
 
             const reader = new FileReader();
             reader.onload = function(e) {
+                // Находим пользователя в массиве users
                 const userIndex = users.findIndex(u => u.login === currentUser.login);
                 if (userIndex !== -1) {
+                    // Обновляем аватар в массиве users
                     users[userIndex].avatar = e.target.result;
                     saveUsers();
                     
@@ -1536,11 +1532,12 @@
                     currentUser.avatar = e.target.result;
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     
-                    // Обновляем отображение
+                    // Обновляем отображение в профиле
                     if (viewingProfile?.login === currentUser.login) {
                         viewProfile(currentUser.login);
                     }
                     
+                    // Обновляем списки пользователей
                     loadUsersList();
                     loadPmUsers();
                     
