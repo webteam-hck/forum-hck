@@ -23,6 +23,7 @@
             --text-secondary: #a0b0a0;
             --danger: #ff5555;
             --warning: #ffaa00;
+            --role-owner: #ff00ff;
             --role-admin: #ff00ff;
             --role-tech: #00ffff;
             --role-seo: #ffff00;
@@ -50,7 +51,6 @@
             z-index: -1;
         }
 
-        /* Навигация */
         .navbar {
             background: rgba(10, 20, 10, 0.98);
             backdrop-filter: blur(15px);
@@ -119,6 +119,11 @@
             font-weight: 600;
         }
 
+        .role-owner { 
+            background: rgba(255, 0, 255, 0.15); 
+            border-color: var(--role-owner); 
+            color: var(--role-owner); 
+        }
         .role-admin { 
             background: rgba(255, 0, 255, 0.15); 
             border-color: var(--role-admin); 
@@ -201,7 +206,7 @@
             min-height: 100vh;
         }
 
-        /* ===== НОВАЯ КРАСИВАЯ СТРАНИЦА ВХОДА ===== */
+        /* Страница входа */
         .login-page {
             position: fixed;
             top: 0;
@@ -331,7 +336,7 @@
             min-height: 20px;
         }
 
-        /* ===== ГЛАВНАЯ СТРАНИЦА (как было) ===== */
+        /* Главная страница */
         .posts-header {
             display: flex;
             justify-content: space-between;
@@ -487,7 +492,47 @@
             cursor: pointer;
         }
 
-        /* Пользователи */
+        /* Фильтр пользователей */
+        .users-header {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .users-header h1 {
+            color: var(--accent-green);
+            font-size: 1.3rem;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .filter-btn.active {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
         .users-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -561,7 +606,7 @@
             flex-shrink: 0;
         }
 
-        /* Профиль (исправлен) */
+        /* Профиль */
         .profile-page {
             max-width: 100%;
         }
@@ -1075,7 +1120,7 @@
         </div>
     </nav>
 
-    <!-- Новая красивая страница входа -->
+    <!-- Страница входа -->
     <div id="loginPage" class="login-page">
         <div class="login-container">
             <h1>hck<span>-forum</span></h1>
@@ -1152,9 +1197,19 @@
             </div>
         </div>
 
-        <!-- Пользователи -->
+        <!-- Пользователи с фильтром -->
         <div id="usersPage" class="page">
-            <h1 style="color: var(--accent-green); margin-bottom: 0.8rem; font-size: 1.3rem;">Пользователи</h1>
+            <div class="users-header">
+                <h1>Пользователи</h1>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="owner">Овнер</button>
+                    <button class="filter-btn" data-filter="tech">Тех админы</button>
+                    <button class="filter-btn" data-filter="seo">Сис админы</button>
+                    <button class="filter-btn" data-filter="moder">Модераторы</button>
+                    <button class="filter-btn" data-filter="user">Пользователи</button>
+                </div>
+            </div>
             <div class="users-grid" id="usersList"></div>
         </div>
 
@@ -1183,11 +1238,11 @@
             </div>
         </div>
 
-        <!-- Профиль (исправлен) -->
+        <!-- Профиль -->
         <div id="profilePage" class="page profile-page">
             <div class="profile-header">
                 <div class="profile-avatar" id="profileAvatar" onclick="document.getElementById('avatarInput').click()">
-                    <img id="profileAvatarImg" src="" alt="Avatar">
+                    <img id="profileAvatarImg" src="" alt="Avatar" style="display: none;">
                     <span id="profileAvatarText"></span>
                     <div class="profile-avatar-overlay" id="avatarOverlay">Сменить аватар</div>
                 </div>
@@ -1225,7 +1280,7 @@
     <script>
         // Данные со всеми админами и модерами
         let users = JSON.parse(localStorage.getItem('users')) || [
-            { login: 'waxues', password: 'root', role: 'admin', avatar: null, joined: new Date().toISOString() },
+            { login: 'waxues', password: 'root', role: 'owner', avatar: null, joined: new Date().toISOString() },
             { login: 'tech', password: 'admin', role: 'tech', avatar: null, joined: new Date().toISOString() },
             { login: 'seo', password: 'admin', role: 'seo', avatar: null, joined: new Date().toISOString() },
             { login: 'moder1', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString() },
@@ -1242,6 +1297,7 @@
         let selectedPmUser = null;
         let viewingProfile = null;
         let selectedCase = null;
+        let currentFilter = 'all';
 
         // Восстанавливаем сессию
         const savedUser = sessionStorage.getItem('currentUser');
@@ -1257,7 +1313,7 @@
 
         function getRoleName(role) {
             const roles = {
-                'admin': 'Главный админ',
+                'owner': 'Овнер',
                 'tech': 'Тех админ',
                 'seo': 'Сис админ',
                 'moder': 'Модератор',
@@ -1283,7 +1339,7 @@
                 roleElement.className = `user-role role-${currentUser.role}`;
                 
                 document.getElementById('createPostSection').style.display = 
-                    currentUser.role === 'admin' ? 'block' : 'none';
+                    currentUser.role === 'owner' ? 'block' : 'none';
 
                 showPage('home');
                 loadPosts();
@@ -1310,7 +1366,10 @@
                 if (link.dataset.page === pageId) link.classList.add('active');
             });
 
-            if (pageId === 'users') loadUsersList();
+            if (pageId === 'users') {
+                currentFilter = 'all';
+                loadUsersList();
+            }
             if (pageId === 'general') loadGeneralMessages();
             if (pageId === 'pm') loadPmUsers();
             if (pageId === 'cases') loadCasesList();
@@ -1330,7 +1389,7 @@
                     <div class="post-content">${post.content.replace(/</g, '&lt;')}</div>
                     ${post.image ? `<div class="post-image"><img src="${post.image}" alt="Post image"></div>` : ''}
                     <div class="post-footer">
-                        ${currentUser?.role === 'admin' ? `
+                        ${currentUser?.role === 'owner' ? `
                             <button class="delete-post-btn" onclick="deletePost('${post.id}')">Удалить</button>
                         ` : ''}
                     </div>
@@ -1339,7 +1398,7 @@
         }
 
         window.deletePost = function(postId) {
-            if (currentUser?.role !== 'admin') return;
+            if (currentUser?.role !== 'owner') return;
             posts = posts.filter(p => p.id !== postId);
             savePosts();
             loadPosts();
@@ -1349,9 +1408,14 @@
             const usersList = document.getElementById('usersList');
             if (!usersList) return;
             
-            const otherUsers = users.filter(u => u.login !== currentUser?.login);
+            let filteredUsers = users.filter(u => u.login !== currentUser?.login);
             
-            usersList.innerHTML = otherUsers.map(user => `
+            // Применяем фильтр
+            if (currentFilter !== 'all') {
+                filteredUsers = filteredUsers.filter(u => u.role === currentFilter);
+            }
+            
+            usersList.innerHTML = filteredUsers.map(user => `
                 <div class="user-card">
                     <div class="user-avatar" onclick="viewProfile('${user.login}')">
                         ${user.avatar ? `<img src="${user.avatar}" alt="Avatar">` : user.login[0].toUpperCase()}
@@ -1364,6 +1428,16 @@
                 </div>
             `).join('');
         }
+
+        // Фильтр пользователей
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                loadUsersList();
+            });
+        });
 
         window.viewProfile = function(login) {
             const user = users.find(u => u.login === login);
@@ -1414,8 +1488,8 @@
                 `;
             }
 
-            const canBan = currentUser?.role === 'admin' || currentUser?.role === 'tech' || currentUser?.role === 'seo';
-            if (canBan && currentUser?.login !== login && user.role !== 'admin' && user.role !== 'tech' && user.role !== 'seo') {
+            const canBan = currentUser?.role === 'owner' || currentUser?.role === 'tech' || currentUser?.role === 'seo';
+            if (canBan && currentUser?.login !== login && user.role !== 'owner' && user.role !== 'tech' && user.role !== 'seo') {
                 actionsHTML += `
                     <button class="profile-action-btn profile-ban-btn" onclick="banUser('${login}')">
                         ⛔ Забанить
@@ -1445,13 +1519,24 @@
             const file = e.target.files[0];
             if (!file) return;
 
+            // Проверяем размер файла (макс 2MB)
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Файл слишком большой. Максимальный размер 2MB');
+                return;
+            }
+
             const reader = new FileReader();
             reader.onload = function(e) {
-                const user = users.find(u => u.login === currentUser.login);
-                if (user) {
-                    user.avatar = e.target.result;
+                const userIndex = users.findIndex(u => u.login === currentUser.login);
+                if (userIndex !== -1) {
+                    users[userIndex].avatar = e.target.result;
                     saveUsers();
                     
+                    // Обновляем currentUser
+                    currentUser.avatar = e.target.result;
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    
+                    // Обновляем отображение
                     if (viewingProfile?.login === currentUser.login) {
                         viewProfile(currentUser.login);
                     }
@@ -1461,6 +1546,8 @@
                     
                     // Очищаем input
                     document.getElementById('avatarInput').value = '';
+                    
+                    alert('Аватар успешно обновлен!');
                 }
             };
             reader.readAsDataURL(file);
@@ -1719,7 +1806,7 @@
                 const user = users.find(u => u.login === login && u.password === password);
 
                 if (user) {
-                    currentUser = { login: user.login, role: user.role };
+                    currentUser = { login: user.login, role: user.role, avatar: user.avatar };
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     updateUI();
                     loadPosts();
@@ -1764,8 +1851,8 @@
             }
 
             if (e.target.id === 'publishPostBtn') {
-                if (!currentUser || currentUser.role !== 'admin') {
-                    alert('Только администратор может создавать посты');
+                if (!currentUser || currentUser.role !== 'owner') {
+                    alert('Только овнер может создавать посты');
                     return;
                 }
                 
@@ -1848,4 +1935,4 @@
         init();
     </script>
 </body>
-            </html>
+    </html>
