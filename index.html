@@ -200,6 +200,120 @@
             min-height: 100vh;
         }
 
+        /* Админ панель */
+        .admin-page {
+            padding: 1rem 0;
+        }
+
+        .admin-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .admin-header h1 {
+            color: var(--accent-green);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .admin-header p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .stat-value {
+            color: var(--accent-green);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+
+        .admin-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-section h2 {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .admin-table th {
+            text-align: left;
+            padding: 0.5rem;
+            color: var(--accent-green);
+            font-size: 0.8rem;
+            border-bottom: 1px solid var(--border-green);
+        }
+
+        .admin-table td {
+            padding: 0.5rem;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-green);
+        }
+
+        .admin-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .admin-btn {
+            padding: 0.3rem 0.8rem;
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: 15px;
+            color: var(--danger);
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-right: 0.3rem;
+        }
+
+        .admin-btn.green {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .role-select {
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 10px;
+            padding: 0.3rem;
+            color: white;
+            font-size: 0.8rem;
+        }
+
         /* Страница входа */
         .login-page {
             position: fixed;
@@ -557,6 +671,13 @@
             cursor: pointer;
             overflow: hidden;
             flex-shrink: 0;
+            border: 2px solid var(--border-green);
+            transition: 0.3s;
+        }
+
+        .user-avatar:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.05);
         }
 
         .user-avatar img {
@@ -598,6 +719,12 @@
             cursor: pointer;
             font-size: 1rem;
             flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .message-btn:hover {
+            background: var(--accent-green);
+            color: black;
         }
 
         /* Профиль */
@@ -630,6 +757,13 @@
             cursor: pointer;
             overflow: hidden;
             position: relative;
+            border: 3px solid var(--border-green);
+            transition: 0.3s;
+        }
+
+        .profile-avatar:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.02);
         }
 
         .profile-avatar img {
@@ -705,6 +839,11 @@
             cursor: pointer;
             font-size: 0.9rem;
             width: 100%;
+            transition: 0.3s;
+        }
+
+        .profile-action-btn:hover {
+            transform: scale(1.02);
         }
 
         .profile-message-btn {
@@ -713,10 +852,18 @@
             color: var(--accent-green);
         }
 
+        .profile-message-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+        }
+
         .profile-ban-btn {
             background: rgba(255, 85, 85, 0.1);
             border: 1px solid var(--danger);
             color: var(--danger);
+        }
+
+        .profile-ban-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
         }
 
         .avatar-upload {
@@ -732,6 +879,11 @@
             color: var(--accent-green);
             cursor: pointer;
             font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .avatar-upload label:hover {
+            background: rgba(0, 255, 136, 0.1);
         }
 
         .avatar-upload input {
@@ -783,6 +935,11 @@
             color: black;
             font-weight: 700;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .general-chat-input button:hover {
+            box-shadow: 0 0 15px var(--accent-green);
         }
 
         /* ЛС */
@@ -816,6 +973,14 @@
             border-radius: 10px;
             cursor: pointer;
             font-size: 0.9rem;
+            transition: 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .pm-user-item:hover,
+        .pm-user-item.active {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--accent-green);
         }
 
         .pm-user-avatar {
@@ -830,6 +995,17 @@
             color: black;
             overflow: hidden;
             flex-shrink: 0;
+        }
+
+        .pm-user-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pm-user-name {
+            flex: 1;
+            color: var(--accent-green);
         }
 
         .pm-chat {
@@ -872,6 +1048,11 @@
             border-radius: 10px;
             color: white;
             font-size: 0.9rem;
+            outline: none;
+        }
+
+        .pm-input input:focus {
+            border-color: var(--accent-green);
         }
 
         .pm-input button {
@@ -882,6 +1063,11 @@
             color: black;
             font-weight: 700;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pm-input button:hover {
+            box-shadow: 0 0 15px var(--accent-green);
         }
 
         /* Кейсы */
@@ -918,6 +1104,11 @@
             cursor: pointer;
             margin-bottom: 0.5rem;
             font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .new-case-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
         }
 
         .case-item {
@@ -927,6 +1118,21 @@
             padding: 0.6rem;
             margin-bottom: 0.5rem;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .case-item:hover {
+            border-color: var(--accent-green);
+            transform: translateX(5px);
+        }
+
+        .case-item.active {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .case-item.closed {
+            opacity: 0.6;
         }
 
         .case-title {
@@ -984,6 +1190,11 @@
             border-radius: 10px;
             color: white;
             font-size: 0.9rem;
+            outline: none;
+        }
+
+        .case-input input:focus {
+            border-color: var(--accent-green);
         }
 
         .case-input button {
@@ -994,6 +1205,11 @@
             color: black;
             font-weight: 700;
             cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .case-input button:hover {
+            box-shadow: 0 0 15px var(--accent-green);
         }
 
         .case-actions {
@@ -1011,6 +1227,11 @@
             font-weight: 700;
             cursor: pointer;
             font-size: 0.85rem;
+            transition: 0.3s;
+        }
+
+        .close-case-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
         }
 
         .message {
@@ -1037,6 +1258,10 @@
             color: var(--accent-green);
             margin-bottom: 0.2rem;
             cursor: pointer;
+        }
+
+        .message .sender:hover {
+            text-decoration: underline;
         }
 
         .message .time {
@@ -1109,6 +1334,7 @@
                     <a data-page="users">Пользователи</a>
                     <a data-page="cases">Кейсы</a>
                     <a data-page="profile">Мой профиль</a>
+                    <a data-page="admin" id="adminLink" style="display: none;">Админ панель</a>
                 </div>
             </div>
         </div>
@@ -1269,6 +1495,78 @@
                 </div>
             </div>
         </div>
+
+        <!-- Админ панель (только для владельца) -->
+        <div id="adminPage" class="page admin-page">
+            <div class="admin-header">
+                <h1>Админ панель</h1>
+                <p>Управление форумом</p>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalUsers">0</div>
+                    <div class="stat-label">Всего пользователей</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalPosts">0</div>
+                    <div class="stat-label">Всего постов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCases">0</div>
+                    <div class="stat-label">Всего кейсов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalMessages">0</div>
+                    <div class="stat-label">Сообщений</div>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h2>Управление пользователями</h2>
+                <table class="admin-table" id="usersTable">
+                    <thead>
+                        <tr>
+                            <th>Логин</th>
+                            <th>Роль</th>
+                            <th>Дата регистрации</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="admin-section">
+                <h2>Управление постами</h2>
+                <table class="admin-table" id="postsTable">
+                    <thead>
+                        <tr>
+                            <th>Автор</th>
+                            <th>Текст</th>
+                            <th>Дата</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="postsTableBody"></tbody>
+                </table>
+            </div>
+
+            <div class="admin-section">
+                <h2>Управление кейсами</h2>
+                <table class="admin-table" id="casesTable">
+                    <thead>
+                        <tr>
+                            <th>Автор</th>
+                            <th>Тема</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody id="casesTableBody"></tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1320,6 +1618,7 @@
             const loginPage = document.getElementById('loginPage');
             const navbar = document.getElementById('navbar');
             const mainContainer = document.getElementById('mainContainer');
+            const adminLink = document.getElementById('adminLink');
 
             if (currentUser) {
                 loginPage.style.display = 'none';
@@ -1331,6 +1630,13 @@
                 const roleElement = document.getElementById('currentUserRole');
                 roleElement.textContent = getRoleName(currentUser.role);
                 roleElement.className = `user-role role-${currentUser.role}`;
+                
+                // Показываем ссылку на админку только для owner
+                if (currentUser.role === 'owner') {
+                    adminLink.style.display = 'inline-block';
+                } else {
+                    adminLink.style.display = 'none';
+                }
                 
                 document.getElementById('createPostSection').style.display = 
                     currentUser.role === 'owner' ? 'block' : 'none';
@@ -1368,6 +1674,7 @@
             if (pageId === 'pm') loadPmUsers();
             if (pageId === 'cases') loadCasesList();
             if (pageId === 'profile') viewProfile(currentUser.login);
+            if (pageId === 'admin' && currentUser?.role === 'owner') loadAdminPanel();
         }
 
         function loadPosts() {
@@ -1396,6 +1703,7 @@
             posts = posts.filter(p => p.id !== postId);
             savePosts();
             loadPosts();
+            if (currentUser?.role === 'owner') loadAdminPanel();
         };
 
         function loadUsersList() {
@@ -1404,7 +1712,6 @@
             
             let filteredUsers = users.filter(u => u.login !== currentUser?.login);
             
-            // Применяем фильтр
             if (currentFilter !== 'all') {
                 filteredUsers = filteredUsers.filter(u => u.role === currentFilter);
             }
@@ -1501,6 +1808,7 @@
                 generalMessages = generalMessages.filter(m => m.from !== login);
                 saveGeneralMessages();
                 alert(`Пользователь ${login} забанен`);
+                if (currentUser?.role === 'owner') loadAdminPanel();
                 showPage('users');
                 loadUsersList();
             }
@@ -1521,10 +1829,9 @@
 
             const reader = new FileReader();
             reader.onload = function(e) {
-                // Находим пользователя в массиве users
+                // Обновляем в массиве users
                 const userIndex = users.findIndex(u => u.login === currentUser.login);
                 if (userIndex !== -1) {
-                    // Обновляем аватар в массиве users
                     users[userIndex].avatar = e.target.result;
                     saveUsers();
                     
@@ -1532,12 +1839,20 @@
                     currentUser.avatar = e.target.result;
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     
-                    // Обновляем отображение в профиле
+                    // Обновляем все отображения
                     if (viewingProfile?.login === currentUser.login) {
                         viewProfile(currentUser.login);
                     }
                     
-                    // Обновляем списки пользователей
+                    // Принудительно обновляем аватар в профиле
+                    const avatarImg = document.getElementById('profileAvatarImg');
+                    const avatarText = document.getElementById('profileAvatarText');
+                    
+                    avatarImg.src = e.target.result;
+                    avatarImg.style.display = 'block';
+                    avatarText.style.display = 'none';
+                    
+                    // Обновляем списки
                     loadUsersList();
                     loadPmUsers();
                     
@@ -1759,6 +2074,7 @@
             saveCases();
             loadCasesList();
             selectCase(newCase.id);
+            if (currentUser?.role === 'owner') loadAdminPanel();
         });
 
         document.getElementById('closeCaseBtn')?.addEventListener('click', () => {
@@ -1768,7 +2084,93 @@
             saveCases();
             loadCasesList();
             selectCase(selectedCase.id);
+            if (currentUser?.role === 'owner') loadAdminPanel();
         });
+
+        // Админ панель
+        function loadAdminPanel() {
+            if (currentUser?.role !== 'owner') return;
+
+            // Статистика
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalPosts').textContent = posts.length;
+            document.getElementById('totalCases').textContent = cases.length;
+            document.getElementById('totalMessages').textContent = generalMessages.length + Object.keys(privateMessages).length;
+
+            // Таблица пользователей
+            const usersTableBody = document.getElementById('usersTableBody');
+            usersTableBody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.login}</td>
+                    <td>
+                        <select class="role-select" onchange="changeUserRole('${user.login}', this.value)">
+                            <option value="owner" ${user.role === 'owner' ? 'selected' : ''}>Овнер</option>
+                            <option value="tech" ${user.role === 'tech' ? 'selected' : ''}>Тех админ</option>
+                            <option value="seo" ${user.role === 'seo' ? 'selected' : ''}>Сис админ</option>
+                            <option value="moder" ${user.role === 'moder' ? 'selected' : ''}>Модератор</option>
+                            <option value="user" ${user.role === 'user' ? 'selected' : ''}>Пользователь</option>
+                        </select>
+                    </td>
+                    <td>${new Date(user.joined).toLocaleDateString()}</td>
+                    <td>
+                        ${user.login !== 'waxues' ? `
+                            <button class="admin-btn" onclick="banUser('${user.login}')">Забанить</button>
+                        ` : ''}
+                    </td>
+                </tr>
+            `).join('');
+
+            // Таблица постов
+            const postsTableBody = document.getElementById('postsTableBody');
+            postsTableBody.innerHTML = posts.map(post => `
+                <tr>
+                    <td>${post.author}</td>
+                    <td>${post.content.substring(0, 30)}${post.content.length > 30 ? '...' : ''}</td>
+                    <td>${new Date(post.date).toLocaleDateString()}</td>
+                    <td>
+                        <button class="admin-btn" onclick="deletePost('${post.id}')">Удалить</button>
+                    </td>
+                </tr>
+            `).join('');
+
+            // Таблица кейсов
+            const casesTableBody = document.getElementById('casesTableBody');
+            casesTableBody.innerHTML = cases.map(c => `
+                <tr>
+                    <td>${c.user}</td>
+                    <td>${c.title}</td>
+                    <td>${c.status === 'open' ? 'Открыт' : 'Закрыт'}</td>
+                    <td>
+                        <button class="admin-btn ${c.status === 'open' ? 'green' : ''}" onclick="toggleCaseStatus('${c.id}')">
+                            ${c.status === 'open' ? 'Закрыть' : 'Открыть'}
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        window.changeUserRole = function(login, newRole) {
+            if (login === 'waxues') return;
+            const userIndex = users.findIndex(u => u.login === login);
+            if (userIndex !== -1) {
+                users[userIndex].role = newRole;
+                saveUsers();
+                loadAdminPanel();
+                loadUsersList();
+                loadPmUsers();
+                if (viewingProfile?.login === login) viewProfile(login);
+            }
+        };
+
+        window.toggleCaseStatus = function(caseId) {
+            const caseIndex = cases.findIndex(c => c.id === caseId);
+            if (caseIndex !== -1) {
+                cases[caseIndex].status = cases[caseIndex].status === 'open' ? 'closed' : 'open';
+                saveCases();
+                loadAdminPanel();
+                if (selectedCase?.id === caseId) selectCase(caseId);
+            }
+        };
 
         function init() {
             if (posts.length === 0) {
@@ -1877,6 +2279,7 @@
                         document.getElementById('fileName').textContent = 'Файл не выбран';
                         loadPosts();
                         alert('Пост опубликован!');
+                        if (currentUser?.role === 'owner') loadAdminPanel();
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 } else {
@@ -1891,6 +2294,7 @@
                     document.getElementById('postContent').value = '';
                     loadPosts();
                     alert('Пост опубликован!');
+                    if (currentUser?.role === 'owner') loadAdminPanel();
                 }
             }
 
