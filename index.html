@@ -27,6 +27,7 @@
             --role-tech: #00ffff;
             --role-seo: #ffff00;
             --role-moder: #ff8800;
+            --role-user: #a0b0a0;
         }
 
         body {
@@ -140,8 +141,8 @@
         }
         .role-user { 
             background: rgba(255, 255, 255, 0.1); 
-            border-color: var(--text-secondary); 
-            color: var(--text-secondary); 
+            border-color: var(--role-user); 
+            color: var(--role-user); 
         }
 
         .logout-btn {
@@ -187,6 +188,7 @@
             background: rgba(0, 0, 0, 0.3);
         }
 
+        .nav-links a:hover,
         .nav-links a.active {
             background: rgba(0, 255, 136, 0.15);
             color: var(--accent-green);
@@ -226,9 +228,15 @@
 
         .admin-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
             margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .admin-stats {
+                grid-template-columns: repeat(4, 1fr);
+            }
         }
 
         .stat-card {
@@ -241,7 +249,7 @@
 
         .stat-value {
             color: var(--accent-green);
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 700;
         }
 
@@ -267,20 +275,19 @@
         .admin-table {
             width: 100%;
             border-collapse: collapse;
+            font-size: 0.85rem;
         }
 
         .admin-table th {
             text-align: left;
             padding: 0.5rem;
             color: var(--accent-green);
-            font-size: 0.8rem;
             border-bottom: 1px solid var(--border-green);
         }
 
         .admin-table td {
             padding: 0.5rem;
             color: var(--text-primary);
-            font-size: 0.9rem;
             border-bottom: 1px solid var(--border-green);
         }
 
@@ -288,15 +295,48 @@
             border-bottom: none;
         }
 
+        .role-checkbox-group {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .role-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+            padding: 0.2rem 0.4rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+
+        .role-checkbox input {
+            margin-right: 0.2rem;
+            accent-color: var(--accent-green);
+        }
+
+        .role-checkbox.owner { border-color: var(--role-owner); color: var(--role-owner); }
+        .role-checkbox.tech { border-color: var(--role-tech); color: var(--role-tech); }
+        .role-checkbox.seo { border-color: var(--role-seo); color: var(--role-seo); }
+        .role-checkbox.moder { border-color: var(--role-moder); color: var(--role-moder); }
+        .role-checkbox.user { border-color: var(--role-user); color: var(--role-user); }
+
         .admin-btn {
             padding: 0.3rem 0.8rem;
             background: rgba(255, 85, 85, 0.1);
             border: 1px solid var(--danger);
             border-radius: 15px;
             color: var(--danger);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             cursor: pointer;
-            margin-right: 0.3rem;
+            transition: 0.3s;
+        }
+
+        .admin-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
         }
 
         .admin-btn.green {
@@ -305,13 +345,16 @@
             color: var(--accent-green);
         }
 
-        .role-select {
-            background: var(--bg-input);
+        .admin-btn.green:hover {
+            background: rgba(0, 255, 136, 0.2);
+        }
+
+        .user-avatar-small {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
             border: 1px solid var(--border-green);
-            border-radius: 10px;
-            padding: 0.3rem;
-            color: white;
-            font-size: 0.8rem;
         }
 
         /* Страница входа */
@@ -630,11 +673,7 @@
             transition: 0.3s;
         }
 
-        .filter-btn:hover {
-            background: rgba(0, 255, 136, 0.1);
-            border-color: var(--accent-green);
-        }
-
+        .filter-btn:hover,
         .filter-btn.active {
             background: rgba(0, 255, 136, 0.15);
             border-color: var(--accent-green);
@@ -852,18 +891,10 @@
             color: var(--accent-green);
         }
 
-        .profile-message-btn:hover {
-            background: rgba(0, 255, 136, 0.2);
-        }
-
         .profile-ban-btn {
             background: rgba(255, 85, 85, 0.1);
             border: 1px solid var(--danger);
             color: var(--danger);
-        }
-
-        .profile-ban-btn:hover {
-            background: rgba(255, 85, 85, 0.2);
         }
 
         .avatar-upload {
@@ -925,6 +956,10 @@
             color: white;
             outline: none;
             font-size: 0.95rem;
+        }
+
+        .general-chat-input input:focus {
+            border-color: var(--accent-green);
         }
 
         .general-chat-input button {
@@ -1131,10 +1166,6 @@
             background: rgba(0, 255, 136, 0.1);
         }
 
-        .case-item.closed {
-            opacity: 0.6;
-        }
-
         .case-title {
             font-weight: 700;
             color: var(--accent-green);
@@ -1329,12 +1360,12 @@
             <div class="nav-links-wrapper">
                 <div class="nav-links" id="navLinks">
                     <a data-page="home">Главная</a>
-                    <a data-page="general">Общий чат</a>
-                    <a data-page="pm">Личные сообщения</a>
-                    <a data-page="users">Пользователи</a>
+                    <a data-page="general">Чат</a>
+                    <a data-page="pm">ЛС</a>
+                    <a data-page="users">Люди</a>
                     <a data-page="cases">Кейсы</a>
-                    <a data-page="profile">Мой профиль</a>
-                    <a data-page="admin" id="adminLink" style="display: none;">Админ панель</a>
+                    <a data-page="profile">Профиль</a>
+                    <a data-page="admin" id="adminLink" style="display: none;">Админка</a>
                 </div>
             </div>
         </div>
@@ -1438,7 +1469,7 @@
             <div class="cases-page">
                 <div class="cases-sidebar">
                     <h3>Обращения</h3>
-                    <button class="new-case-btn" id="newCaseBtn">➕ Создать обращение</button>
+                    <button class="new-case-btn" id="newCaseBtn">➕ Создать</button>
                     <div id="casesList"></div>
                 </div>
                 <div class="case-chat" id="caseChat" style="display: none;">
@@ -1452,7 +1483,7 @@
                         <button id="sendCaseMessageBtn">Отправить</button>
                     </div>
                     <div class="case-actions" id="caseActions">
-                        <button class="close-case-btn" id="closeCaseBtn">🔒 Закрыть обращение</button>
+                        <button class="close-case-btn" id="closeCaseBtn">🔒 Закрыть</button>
                     </div>
                 </div>
             </div>
@@ -1506,15 +1537,15 @@
             <div class="admin-stats">
                 <div class="stat-card">
                     <div class="stat-value" id="totalUsers">0</div>
-                    <div class="stat-label">Всего пользователей</div>
+                    <div class="stat-label">Пользователей</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value" id="totalPosts">0</div>
-                    <div class="stat-label">Всего постов</div>
+                    <div class="stat-label">Постов</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value" id="totalCases">0</div>
-                    <div class="stat-label">Всего кейсов</div>
+                    <div class="stat-label">Кейсов</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-value" id="totalMessages">0</div>
@@ -1524,47 +1555,53 @@
 
             <div class="admin-section">
                 <h2>Управление пользователями</h2>
-                <table class="admin-table" id="usersTable">
-                    <thead>
-                        <tr>
-                            <th>Логин</th>
-                            <th>Роль</th>
-                            <th>Дата регистрации</th>
-                            <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersTableBody"></tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Аватар</th>
+                                <th>Логин</th>
+                                <th>Роль</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody"></tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="admin-section">
                 <h2>Управление постами</h2>
-                <table class="admin-table" id="postsTable">
-                    <thead>
-                        <tr>
-                            <th>Автор</th>
-                            <th>Текст</th>
-                            <th>Дата</th>
-                            <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody id="postsTableBody"></tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="postsTable">
+                        <thead>
+                            <tr>
+                                <th>Автор</th>
+                                <th>Текст</th>
+                                <th>Дата</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="postsTableBody"></tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="admin-section">
                 <h2>Управление кейсами</h2>
-                <table class="admin-table" id="casesTable">
-                    <thead>
-                        <tr>
-                            <th>Автор</th>
-                            <th>Тема</th>
-                            <th>Статус</th>
-                            <th>Действия</th>
-                        </tr>
-                    </thead>
-                    <tbody id="casesTableBody"></tbody>
-                </table>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table" id="casesTable">
+                        <thead>
+                            <tr>
+                                <th>Автор</th>
+                                <th>Тема</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody id="casesTableBody"></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -1784,7 +1821,7 @@
             if (currentUser?.login !== login) {
                 actionsHTML += `
                     <button class="profile-action-btn profile-message-btn" onclick="startPrivateChat('${login}')">
-                        💬 Написать сообщение
+                        💬 Написать
                     </button>
                 `;
             }
@@ -1814,9 +1851,12 @@
             }
         };
 
-        // ИСПРАВЛЕННАЯ загрузка аватара
+        // ИСПРАВЛЕННАЯ загрузка аватара - ПРОСТАЯ И РАБОЧАЯ
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
-            if (!currentUser) return;
+            if (!currentUser) {
+                alert('Сначала войдите в систему');
+                return;
+            }
             
             const file = e.target.files[0];
             if (!file) return;
@@ -1829,28 +1869,30 @@
 
             const reader = new FileReader();
             reader.onload = function(e) {
-                // Обновляем в массиве users
+                const imageData = e.target.result;
+                
+                // Находим пользователя в массиве
                 const userIndex = users.findIndex(u => u.login === currentUser.login);
+                
                 if (userIndex !== -1) {
-                    users[userIndex].avatar = e.target.result;
+                    // Обновляем в массиве users
+                    users[userIndex].avatar = imageData;
                     saveUsers();
                     
                     // Обновляем currentUser
-                    currentUser.avatar = e.target.result;
+                    currentUser.avatar = imageData;
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     
-                    // Обновляем все отображения
-                    if (viewingProfile?.login === currentUser.login) {
-                        viewProfile(currentUser.login);
-                    }
-                    
-                    // Принудительно обновляем аватар в профиле
+                    // Обновляем отображение в профиле
                     const avatarImg = document.getElementById('profileAvatarImg');
                     const avatarText = document.getElementById('profileAvatarText');
                     
-                    avatarImg.src = e.target.result;
+                    avatarImg.src = imageData;
                     avatarImg.style.display = 'block';
                     avatarText.style.display = 'none';
+                    
+                    // Обновляем имя пользователя в шапке
+                    document.getElementById('currentUserName').textContent = currentUser.login;
                     
                     // Обновляем списки
                     loadUsersList();
@@ -1859,7 +1901,7 @@
                     // Очищаем input
                     document.getElementById('avatarInput').value = '';
                     
-                    alert('Аватар успешно обновлен!');
+                    alert('✅ Аватар успешно обновлен!');
                 }
             };
             reader.readAsDataURL(file);
@@ -2087,7 +2129,7 @@
             if (currentUser?.role === 'owner') loadAdminPanel();
         });
 
-        // Админ панель
+        // Админ панель с галочками для ролей
         function loadAdminPanel() {
             if (currentUser?.role !== 'owner') return;
 
@@ -2097,28 +2139,53 @@
             document.getElementById('totalCases').textContent = cases.length;
             document.getElementById('totalMessages').textContent = generalMessages.length + Object.keys(privateMessages).length;
 
-            // Таблица пользователей
+            // Таблица пользователей с галочками
             const usersTableBody = document.getElementById('usersTableBody');
-            usersTableBody.innerHTML = users.map(user => `
+            usersTableBody.innerHTML = users.map(user => {
+                const isOwner = user.role === 'owner';
+                const isTech = user.role === 'tech';
+                const isSeo = user.role === 'seo';
+                const isModer = user.role === 'moder';
+                const isUser = user.role === 'user';
+                
+                return `
                 <tr>
+                    <td>
+                        <img src="${user.avatar || ''}" class="user-avatar-small" style="${!user.avatar ? 'display: none;' : ''}" onerror="this.style.display='none'">
+                        <span style="${user.avatar ? 'display: none;' : ''}">${user.login[0].toUpperCase()}</span>
+                    </td>
                     <td>${user.login}</td>
                     <td>
-                        <select class="role-select" onchange="changeUserRole('${user.login}', this.value)">
-                            <option value="owner" ${user.role === 'owner' ? 'selected' : ''}>Овнер</option>
-                            <option value="tech" ${user.role === 'tech' ? 'selected' : ''}>Тех админ</option>
-                            <option value="seo" ${user.role === 'seo' ? 'selected' : ''}>Сис админ</option>
-                            <option value="moder" ${user.role === 'moder' ? 'selected' : ''}>Модератор</option>
-                            <option value="user" ${user.role === 'user' ? 'selected' : ''}>Пользователь</option>
-                        </select>
+                        <div class="role-checkbox-group">
+                            <label class="role-checkbox owner">
+                                <input type="radio" name="role_${user.login}" value="owner" ${isOwner ? 'checked' : ''} ${user.login === 'waxues' ? 'disabled' : ''} onchange="changeUserRole('${user.login}', 'owner')">
+                                Овнер
+                            </label>
+                            <label class="role-checkbox tech">
+                                <input type="radio" name="role_${user.login}" value="tech" ${isTech ? 'checked' : ''} ${user.login === 'waxues' ? 'disabled' : ''} onchange="changeUserRole('${user.login}', 'tech')">
+                                Тех
+                            </label>
+                            <label class="role-checkbox seo">
+                                <input type="radio" name="role_${user.login}" value="seo" ${isSeo ? 'checked' : ''} ${user.login === 'waxues' ? 'disabled' : ''} onchange="changeUserRole('${user.login}', 'seo')">
+                                Сис
+                            </label>
+                            <label class="role-checkbox moder">
+                                <input type="radio" name="role_${user.login}" value="moder" ${isModer ? 'checked' : ''} ${user.login === 'waxues' ? 'disabled' : ''} onchange="changeUserRole('${user.login}', 'moder')">
+                                Модер
+                            </label>
+                            <label class="role-checkbox user">
+                                <input type="radio" name="role_${user.login}" value="user" ${isUser ? 'checked' : ''} ${user.login === 'waxues' ? 'disabled' : ''} onchange="changeUserRole('${user.login}', 'user')">
+                                Юзер
+                            </label>
+                        </div>
                     </td>
-                    <td>${new Date(user.joined).toLocaleDateString()}</td>
                     <td>
                         ${user.login !== 'waxues' ? `
                             <button class="admin-btn" onclick="banUser('${user.login}')">Забанить</button>
                         ` : ''}
                     </td>
                 </tr>
-            `).join('');
+            `}).join('');
 
             // Таблица постов
             const postsTableBody = document.getElementById('postsTableBody');
