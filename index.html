@@ -1671,12 +1671,18 @@
                 // Показываем ссылку на админку только для owner
                 if (currentUser.role === 'owner') {
                     adminLink.style.display = 'inline-block';
+                    console.log('✅ Админ ссылка показана для', currentUser.login);
                 } else {
                     adminLink.style.display = 'none';
                 }
                 
                 document.getElementById('createPostSection').style.display = 
                     currentUser.role === 'owner' ? 'block' : 'none';
+
+                // Если мы на странице админки, но не owner - перенаправляем на главную
+                if (document.getElementById('adminPage').classList.contains('active') && currentUser.role !== 'owner') {
+                    showPage('home');
+                }
 
                 showPage('home');
                 loadPosts();
@@ -1711,7 +1717,10 @@
             if (pageId === 'pm') loadPmUsers();
             if (pageId === 'cases') loadCasesList();
             if (pageId === 'profile') viewProfile(currentUser.login);
-            if (pageId === 'admin' && currentUser?.role === 'owner') loadAdminPanel();
+            if (pageId === 'admin' && currentUser?.role === 'owner') {
+                console.log('📊 Загружаем админ панель');
+                loadAdminPanel();
+            }
         }
 
         function loadPosts() {
@@ -1851,7 +1860,7 @@
             }
         };
 
-        // ИСПРАВЛЕННАЯ загрузка аватара - ПРОСТАЯ И РАБОЧАЯ
+        // ИСПРАВЛЕННАЯ загрузка аватара
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
             if (!currentUser) {
                 alert('Сначала войдите в систему');
@@ -1861,7 +1870,6 @@
             const file = e.target.files[0];
             if (!file) return;
 
-            // Проверяем размер файла (макс 2MB)
             if (file.size > 2 * 1024 * 1024) {
                 alert('Файл слишком большой. Максимальный размер 2MB');
                 return;
@@ -1871,19 +1879,15 @@
             reader.onload = function(e) {
                 const imageData = e.target.result;
                 
-                // Находим пользователя в массиве
                 const userIndex = users.findIndex(u => u.login === currentUser.login);
                 
                 if (userIndex !== -1) {
-                    // Обновляем в массиве users
                     users[userIndex].avatar = imageData;
                     saveUsers();
                     
-                    // Обновляем currentUser
                     currentUser.avatar = imageData;
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     
-                    // Обновляем отображение в профиле
                     const avatarImg = document.getElementById('profileAvatarImg');
                     const avatarText = document.getElementById('profileAvatarText');
                     
@@ -1891,14 +1895,11 @@
                     avatarImg.style.display = 'block';
                     avatarText.style.display = 'none';
                     
-                    // Обновляем имя пользователя в шапке
                     document.getElementById('currentUserName').textContent = currentUser.login;
                     
-                    // Обновляем списки
                     loadUsersList();
                     loadPmUsers();
                     
-                    // Очищаем input
                     document.getElementById('avatarInput').value = '';
                     
                     alert('✅ Аватар успешно обновлен!');
@@ -2133,6 +2134,8 @@
         function loadAdminPanel() {
             if (currentUser?.role !== 'owner') return;
 
+            console.log('📊 Загружаем данные админ панели');
+
             // Статистика
             document.getElementById('totalUsers').textContent = users.length;
             document.getElementById('totalPosts').textContent = posts.length;
@@ -2214,6 +2217,8 @@
                     </td>
                 </tr>
             `).join('');
+
+            console.log('✅ Админ панель загружена');
         }
 
         window.changeUserRole = function(login, newRole) {
