@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>hck-team / мобильная версия</title>
+    <title>hck-forum / точка сбора</title>
     <style>
         * {
             margin: 0;
@@ -50,7 +50,6 @@
             z-index: -1;
         }
 
-        /* Навигация - полностью переделана для мобильных */
         .navbar {
             background: rgba(10, 20, 10, 0.98);
             backdrop-filter: blur(15px);
@@ -162,7 +161,6 @@
             white-space: nowrap;
         }
 
-        /* Горизонтальный скролл для табов */
         .nav-links-wrapper {
             overflow-x: auto;
             overflow-y: hidden;
@@ -211,116 +209,84 @@
             min-height: 100vh;
         }
 
-        /* Логин страница */
-        .login-page {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+        /* НОВЫЙ ДИЗАЙН ГЛАВНОЙ СТРАНИЦЫ */
+        .home-page {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            background: var(--bg-dark);
+            flex-direction: column;
+            gap: 1.5rem;
         }
 
-        .login-container {
-            background: rgba(10, 20, 10, 0.95);
-            backdrop-filter: blur(20px);
-            border: 2px solid var(--accent-green);
-            border-radius: 30px;
-            padding: 1.5rem;
-            width: 100%;
-            max-width: 320px;
-            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
-        }
-
-        .login-container h2 {
+        .hero-section {
             text-align: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-            color: var(--accent-green);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .login-container input {
-            width: 100%;
-            padding: 0.8rem;
-            margin-bottom: 0.8rem;
-            background: var(--bg-input);
-            border: 2px solid var(--border-green);
-            border-radius: 15px;
-            color: white;
-            font-size: 0.95rem;
-            outline: none;
-        }
-
-        .login-container button {
-            width: 100%;
-            padding: 0.8rem;
-            background: var(--accent-green);
-            border: none;
-            border-radius: 15px;
-            color: black;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
+            padding: 1.5rem 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
             margin-bottom: 0.5rem;
         }
 
-        .login-container .register-btn {
-            background: transparent;
-            border: 2px solid var(--accent-green);
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 800;
             color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 0 15px var(--accent-green);
         }
 
-        .error-message {
-            color: var(--danger);
-            text-align: center;
-            font-size: 0.85rem;
-            min-height: 20px;
+        .hero-title span {
+            color: white;
         }
 
-        .page {
-            display: none;
-            animation: fadeIn 0.3s ease;
+        .hero-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            font-style: italic;
         }
 
-        .page.active {
-            display: block;
+        .hero-quote {
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .hero-quote p {
+            margin-bottom: 0.5rem;
         }
 
-        /* Главная страница */
-        .posts-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .hero-quote .small {
+            color: var(--accent-green);
+            font-size: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .create-post-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+        }
+
+        .create-post-section h2 {
+            color: var(--accent-green);
+            font-size: 1.2rem;
             margin-bottom: 1rem;
         }
 
-        .posts-header h1 {
-            font-size: 1.4rem;
-            color: var(--accent-green);
-        }
-
         .create-post-form {
-            background: var(--bg-card);
-            border: 1px solid var(--border-green);
-            border-radius: 15px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .create-post-form textarea {
             width: 100%;
-            min-height: 70px;
+            min-height: 80px;
             background: var(--bg-input);
             border: 1px solid var(--border-green);
             border-radius: 12px;
@@ -328,12 +294,11 @@
             color: white;
             font-size: 0.95rem;
             resize: vertical;
-            margin-bottom: 0.8rem;
             outline: none;
         }
 
         .file-upload {
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
         }
 
         .file-upload label {
@@ -359,10 +324,23 @@
             font-weight: 700;
             border: none;
             border-radius: 12px;
-            padding: 0.6rem;
+            padding: 0.7rem;
             cursor: pointer;
             font-size: 0.95rem;
             width: 100%;
+        }
+
+        .posts-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+        }
+
+        .posts-section h2 {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
         }
 
         .posts-grid {
@@ -372,7 +350,7 @@
         }
 
         .post-card {
-            background: var(--bg-card);
+            background: rgba(0, 0, 0, 0.3);
             border: 1px solid var(--border-green);
             border-radius: 15px;
             padding: 1rem;
@@ -426,7 +404,7 @@
             cursor: pointer;
         }
 
-        /* Пользователи */
+        /* Остальные страницы */
         .users-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -604,7 +582,7 @@
             color: var(--danger);
         }
 
-        /* Общий чат */
+        /* Чат */
         .general-chat-page {
             height: calc(100vh - 110px);
             display: flex;
@@ -652,7 +630,7 @@
             white-space: nowrap;
         }
 
-        /* Личные сообщения */
+        /* ЛС */
         .pm-page {
             display: flex;
             flex-direction: column;
@@ -913,7 +891,91 @@
             text-align: right;
         }
 
-        /* Поддержка iPhone */
+        .login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-dark);
+        }
+
+        .login-container {
+            background: rgba(10, 20, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--accent-green);
+            border-radius: 30px;
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 320px;
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 0.8rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border-green);
+            border-radius: 15px;
+            color: white;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 15px;
+            color: black;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-container .register-btn {
+            background: transparent;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .error-message {
+            color: var(--danger);
+            text-align: center;
+            font-size: 0.85rem;
+            min-height: 20px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @supports (padding: max(0px)) {
             .navbar {
                 padding-top: max(0.5rem, env(safe-area-inset-top));
@@ -948,7 +1010,7 @@
     <nav class="navbar" id="navbar" style="display: none;">
         <div class="nav-container">
             <div class="nav-top">
-                <div class="logo" onclick="showPage('home')">hck<span>-team</span></div>
+                <div class="logo" onclick="showPage('home')">hck<span>-forum</span></div>
                 <div class="user-info" id="userInfo">
                     <span class="user-name" id="currentUserName" onclick="viewProfile(currentUser?.login)"></span>
                     <span class="user-role" id="currentUserRole"></span>
@@ -971,7 +1033,7 @@
     <!-- Логин -->
     <div id="loginPage" class="login-page">
         <div class="login-container">
-            <h2>hck-team</h2>
+            <h2>hck-forum</h2>
             <input type="text" id="loginInput" placeholder="Логин">
             <input type="password" id="passwordInput" placeholder="Пароль">
             <button id="loginBtn">Войти</button>
@@ -983,14 +1045,22 @@
     <!-- Основной контент -->
     <div class="container" id="mainContainer" style="display: none;">
         <!-- Главная -->
-        <div id="homePage" class="page">
-            <div class="posts-header">
-                <h1>Лента</h1>
+        <div id="homePage" class="page home-page">
+            <!-- Герой-секция с цитатой -->
+            <div class="hero-section">
+                <div class="hero-title">hck<span>-forum</span></div>
+                <div class="hero-subtitle">• точка сбора / online •</div>
+                <div class="hero-quote">
+                    <p>❗ Привет, свои. Мы здесь, потому что внешние стены иногда рушатся, но внутренний круг остаётся.</p>
+                    <p>Форум в разработке, но пространство уже живое. Всё только начинается.</p>
+                </div>
             </div>
-            
-            <div id="createPostSection" style="display: none;">
+
+            <!-- Создание поста (только для админа) -->
+            <div id="createPostSection" class="create-post-section" style="display: none;">
+                <h2>Создать объявление</h2>
                 <div class="create-post-form">
-                    <textarea id="postContent" placeholder="Новый пост... (только для админа)"></textarea>
+                    <textarea id="postContent" placeholder="Текст нового поста..."></textarea>
                     <div class="file-upload">
                         <label for="postImage">📎 Прикрепить фото</label>
                         <input type="file" id="postImage" accept="image/*">
@@ -1000,7 +1070,11 @@
                 </div>
             </div>
 
-            <div class="posts-grid" id="postsList"></div>
+            <!-- Лента постов -->
+            <div class="posts-section">
+                <h2>Объявления</h2>
+                <div class="posts-grid" id="postsList"></div>
+            </div>
         </div>
 
         <!-- Общий чат -->
@@ -1103,7 +1177,7 @@
     </div>
 
     <script>
-        // Данные
+        // Данные со всеми админами и модерами
         let users = JSON.parse(localStorage.getItem('users')) || [
             { login: 'waxues', password: 'root', role: 'admin', avatar: null, joined: new Date().toISOString() },
             { login: 'tech', password: 'admin', role: 'tech', avatar: null, joined: new Date().toISOString() },
@@ -1123,6 +1197,7 @@
         let viewingProfile = null;
         let selectedCase = null;
 
+        // Восстанавливаем сессию
         const savedUser = sessionStorage.getItem('currentUser');
         if (savedUser) {
             currentUser = JSON.parse(savedUser);
@@ -1161,6 +1236,7 @@
                 roleElement.textContent = getRoleName(currentUser.role);
                 roleElement.className = `user-role role-${currentUser.role}`;
                 
+                // Показываем форму создания поста только админу
                 document.getElementById('createPostSection').style.display = 
                     currentUser.role === 'admin' ? 'block' : 'none';
 
@@ -1563,7 +1639,7 @@
                 posts.push({
                     id: Date.now().toString(),
                     author: 'waxues',
-                    content: 'Добро пожаловать на форум!',
+                    content: 'Добро пожаловать на hck-forum! Пространство уже живое.',
                     date: new Date().toISOString()
                 });
                 savePosts();
@@ -1577,6 +1653,7 @@
             updateUI();
         }
 
+        // Обработчики событий
         document.addEventListener('click', (e) => {
             if (e.target.matches('.nav-links a')) {
                 e.preventDefault();
@@ -1610,7 +1687,7 @@
                 }
 
                 if (users.find(u => u.login === login)) {
-                    document.getElementById('loginError').textContent = 'Уже существует';
+                    document.getElementById('loginError').textContent = 'Пользователь уже существует';
                     return;
                 }
 
@@ -1622,7 +1699,7 @@
                     avatar: null
                 });
                 saveUsers();
-                document.getElementById('loginError').textContent = 'Регистрация успешна! Войдите.';
+                document.getElementById('loginError').textContent = 'Регистрация успешна! Теперь войдите.';
             }
 
             if (e.target.id === 'logoutBtn') {
@@ -1635,10 +1712,16 @@
             }
 
             if (e.target.id === 'publishPostBtn') {
-                if (!currentUser || currentUser.role !== 'admin') return;
+                if (!currentUser || currentUser.role !== 'admin') {
+                    alert('Только администратор может создавать посты');
+                    return;
+                }
                 
                 const content = document.getElementById('postContent').value;
-                if (!content) return;
+                if (!content) {
+                    alert('Введите текст поста');
+                    return;
+                }
 
                 const fileInput = document.getElementById('postImage');
                 if (fileInput.files && fileInput.files[0]) {
@@ -1656,6 +1739,7 @@
                         fileInput.value = '';
                         document.getElementById('fileName').textContent = 'Файл не выбран';
                         loadPosts();
+                        alert('Пост опубликован!');
                     };
                     reader.readAsDataURL(fileInput.files[0]);
                 } else {
@@ -1668,6 +1752,7 @@
                     savePosts();
                     document.getElementById('postContent').value = '';
                     loadPosts();
+                    alert('Пост опубликован!');
                 }
             }
 
@@ -1709,4 +1794,4 @@
         init();
     </script>
 </body>
-                                                                                                   </html>
+    </html>
