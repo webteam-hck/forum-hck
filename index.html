@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>hck-team / финальная версия</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        :root {
+            --bg-dark: #0a0f0a;
+            --bg-card: #141c14;
+            --bg-input: #1a251a;
+            --accent-green: #00ff88;
+            --accent-dark: #00aa55;
+            --border-green: rgba(0, 255, 136, 0.3);
+            --text-primary: #ffffff;
+            --text-secondary: #a0b0a0;
+            --danger: #ff5555;
+            --warning: #ffaa00;
+            --success: #00ff88;
+            --role-admin: #ff00ff;
+            --role-tech: #00ffff;
+            --role-seo: #ffff00;
+            --role-moder: #ff8800;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(0, 20, 0, 0.9), rgba(0, 10, 0, 0.95)),
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 255, 136, 0.05) 2px, rgba(0, 255, 136, 0.05) 4px);
+            z-index: -1;
+        }
+
+        .navbar {
+            background: rgba(10, 20, 10, 0.95);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-green);
+            padding: 0.8rem 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px var(--accent-green);
+            cursor: pointer;
+        }
+
+        .logo span {
+            color: white;
+            text-shadow: 0 0 10px white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: 0.3s;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-green);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.2);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            background: rgba(0, 255, 136, 0.05);
+            padding: 0.4rem 1rem;
+            border-radius: 40px;
+            border: 1px solid var(--border-green);
+            flex-wrap: wrap;
+        }
+
+        .user-name {
+            color: var(--accent-green);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .user-name:hover {
+            text-decoration: underline;
+        }
+
+        .user-role {
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            border: 1px solid;
+            font-weight: 600;
+        }
+
+        .role-admin { 
+            background: rgba(255, 0, 255, 0.15); 
+            border-color: var(--role-admin); 
+            color: var(--role-admin); 
+        }
+        .role-tech { 
+            background: rgba(0, 255, 255, 0.15); 
+            border-color: var(--role-tech); 
+            color: var(--role-tech); 
+        }
+        .role-seo { 
+            background: rgba(255, 255, 0, 0.15); 
+            border-color: var(--role-seo); 
+            color: var(--role-seo); 
+        }
+        .role-moder { 
+            background: rgba(255, 136, 0, 0.15); 
+            border-color: var(--role-moder); 
+            color: var(--role-moder); 
+        }
+        .role-user { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-color: var(--text-secondary); 
+            color: var(--text-secondary); 
+        }
+
+        .logout-btn {
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
+            border-color: var(--danger);
+            box-shadow: 0 0 10px var(--danger);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 80px 1rem 1rem 1rem;
+            min-height: 100vh;
+        }
+
+        /* Логин страница */
+        .login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-dark);
+        }
+
+        .login-container {
+            background: rgba(10, 20, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--accent-green);
+            border-radius: 40px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+        }
+
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border-green);
+            border-radius: 20px;
+            color: white;
+            font-size: 1rem;
+            transition: 0.3s;
+            outline: none;
+        }
+
+        .login-container input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 20px;
+            color: black;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 0.8rem;
+        }
+
+        .login-container button:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--accent-green);
+        }
+
+        .login-container .register-btn {
+            background: transparent;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .error-message {
+            color: var(--danger);
+            text-align: center;
+            min-height: 24px;
+        }
+
+        .page {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Главная страница */
+        .posts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .posts-header h1 {
+            font-size: 1.8rem;
+            color: var(--accent-green);
+        }
+
+        .create-post-form {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .create-post-form textarea {
+            width: 100%;
+            min-height: 100px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            padding: 1rem;
+            color: white;
+            font-size: 1rem;
+            resize: vertical;
+            margin-bottom: 1rem;
+            outline: none;
+        }
+
+        .file-upload {
+            margin-bottom: 1rem;
+        }
+
+        .file-upload label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            color: var(--accent-green);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .file-upload label:hover {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .create-post-form button {
+            background: var(--accent-green);
+            color: black;
+            font-weight: 700;
+            border: none;
+            border-radius: 15px;
+            padding: 0.8rem 2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .create-post-form button:hover {
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        .posts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .posts-grid {
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            }
+        }
+
+        .post-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .post-card:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 5px 20px rgba(0, 255, 136, 0.15);
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .post-author {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+        }
+
+        .post-author:hover {
+            text-decoration: underline;
+        }
+
+        .post-content {
+            line-height: 1.6;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .post-image {
+            max-width: 100%;
+            border-radius: 15px;
+            margin: 1rem 0;
+        }
+
+        .post-image img {
+            max-width: 100%;
+            border-radius: 15px;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .delete-post-btn {
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .delete-post-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
+            box-shadow: 0 0 10px var(--danger);
+        }
+
+        /* Пользователи */
+        .users-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        
+        @media (min-width: 640px) {
+            .users-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .users-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .user-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: 0.3s;
+            position: relative;
+        }
+        
+        .user-card:hover {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.8rem;
+            color: black;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+            overflow: hidden;
+        }
+
+        .user-avatar:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.05);
+        }
+
+        .user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .user-info {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .user-info h3 {
+            color: var(--accent-green);
+            margin-bottom: 0.3rem;
+            font-size: 1.2rem;
+        }
+        
+        .user-info p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .message-btn {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .message-btn:hover {
+            background: var(--accent-green);
+            color: black;
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        /* Профиль пользователя (отдельная вкладка) */
+        .profile-page {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .profile-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 30px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 4rem;
+            color: black;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 3px solid transparent;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-avatar:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.02);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-avatar-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--accent-green);
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            text-align: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .profile-avatar:hover .profile-avatar-overlay {
+            opacity: 1;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h2 {
+            color: var(--accent-green);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat-value {
+            font-size: 1.5rem;
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .profile-stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .profile-action-btn {
+            padding: 0.8rem 2rem;
+            border-radius: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 1rem;
+        }
+
+        .profile-message-btn {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .profile-message-btn:hover {
+            background: var(--accent-green);
+            color: black;
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        .profile-ban-btn {
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .profile-ban-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
+            box-shadow: 0 0 15px var(--danger);
+        }
+
+        .avatar-upload {
+            margin-top: 1rem;
+        }
+
+        .avatar-upload label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            color: var(--accent-green);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .avatar-upload label:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .avatar-upload input {
+            display: none;
+        }
+
+        /* Личные сообщения */
+        .pm-page {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1rem;
+            height: calc(100vh - 120px);
+        }
+
+        @media (max-width: 768px) {
+            .pm-page {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pm-sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .pm-sidebar h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .pm-user-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 0.3rem;
+            border: 1px solid transparent;
+        }
+
+        .pm-user-item:hover,
+        .pm-user-item.active {
+            background: rgba(0, 255, 136, 0.1);
+            border-color: var(--accent-green);
+        }
+
+        .pm-user-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: black;
+            overflow: hidden;
+        }
+
+        .pm-user-avatar img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .pm-user-name {
+            flex: 1;
+            color: var(--accent-green);
+        }
+
+        .pm-chat {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .pm-chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-green);
+        }
+
+        .pm-chat-header h2 {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+        }
+
+        .pm-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .pm-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-green);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pm-input input {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            color: white;
+            outline: none;
+        }
+
+        .pm-input input:focus {
+            border-color: var(--accent-green);
+        }
+
+        .pm-input button {
+            padding: 0.8rem 1.5rem;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 15px;
+            color: black;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .pm-input button:hover {
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        /* Общий чат */
+        .general-chat-page {
+            height: calc(100vh - 120px);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .general-chat-messages {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1rem;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .general-chat-input {
+            display: flex;
+            gap: 0.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1rem;
+        }
+
+        .general-chat-input input {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            color: white;
+            outline: none;
+        }
+
+        .general-chat-input input:focus {
+            border-color: var(--accent-green);
+        }
+
+        .general-chat-input button {
+            padding: 0.8rem 1.5rem;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 15px;
+            color: black;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .general-chat-input button:hover {
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 0.8rem;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .message.incoming {
+            background: var(--bg-input);
+            align-self: flex-start;
+        }
+        
+        .message.outgoing {
+            background: rgba(0, 255, 136, 0.15);
+            align-self: flex-end;
+        }
+
+        .message .sender {
+            font-size: 0.8rem;
+            color: var(--accent-green);
+            margin-bottom: 0.3rem;
+            cursor: pointer;
+        }
+
+        .message .sender:hover {
+            text-decoration: underline;
+        }
+
+        .message .time {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            text-align: right;
+        }
+
+        /* Кейсы */
+        .cases-page {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1rem;
+            height: calc(100vh - 120px);
+        }
+
+        @media (max-width: 768px) {
+            .cases-page {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .cases-sidebar {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1rem;
+            overflow-y: auto;
+        }
+
+        .cases-sidebar h3 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+
+        .new-case-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-green);
+            border-radius: 15px;
+            color: var(--accent-green);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .new-case-btn:hover {
+            background: rgba(0, 255, 136, 0.2);
+            box-shadow: 0 0 15px var(--accent-green);
+        }
+
+        .case-item {
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .case-item:hover {
+            border-color: var(--accent-green);
+            transform: translateX(5px);
+        }
+
+        .case-item.active {
+            border-color: var(--accent-green);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .case-item.closed {
+            opacity: 0.6;
+        }
+
+        .case-title {
+            font-weight: 700;
+            color: var(--accent-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .case-status {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .status-open {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .status-closed {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+            border: 1px solid var(--text-secondary);
+        }
+
+        .case-chat {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .case-chat-header {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-green);
+        }
+
+        .case-chat-header h2 {
+            color: var(--accent-green);
+            margin-bottom: 0.3rem;
+        }
+
+        .case-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .case-input {
+            padding: 1rem;
+            border-top: 1px solid var(--border-green);
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .case-input input {
+            flex: 1;
+            padding: 0.8rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            color: white;
+            outline: none;
+        }
+
+        .case-input input:focus {
+            border-color: var(--accent-green);
+        }
+
+        .case-input button {
+            padding: 0.8rem 1.5rem;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 15px;
+            color: black;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .case-input button:hover {
+            box-shadow: 0 0 20px var(--accent-green);
+        }
+
+        .case-actions {
+            padding: 1rem;
+            border-top: 1px solid var(--border-green);
+        }
+
+        .close-case-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: 15px;
+            color: var(--danger);
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .close-case-btn:hover {
+            background: rgba(255, 85, 85, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .user-info {
+                justify-content: center;
+            }
+            
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .profile-stats {
+                justify-content: center;
+            }
+            
+            .profile-actions {
+                justify-content: center;
+            }
+            
+            .pm-input {
+                flex-direction: column;
+            }
+            
+            .general-chat-input {
+                flex-direction: column;
+            }
+        }
+
+        @supports (padding: max(0px)) {
+            .navbar {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+            
+            .container {
+                padding-left: max(1rem, env(safe-area-inset-left));
+                padding-right: max(1rem, env(safe-area-inset-right));
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-input);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar" style="display: none;">
+        <div class="nav-container">
+            <div class="logo" onclick="showPage('home')">hck<span>-team</span></div>
+            <div class="nav-links" id="navLinks">
+                <a data-page="home">Главная</a>
+                <a data-page="general">Общий чат</a>
+                <a data-page="pm">Личные сообщения</a>
+                <a data-page="users">Пользователи</a>
+                <a data-page="cases">Кейсы</a>
+                <a data-page="profile">Мой профиль</a>
+            </div>
+            <div class="user-info" id="userInfo">
+                <span class="user-name" id="currentUserName" onclick="viewProfile(currentUser?.login)"></span>
+                <span class="user-role" id="currentUserRole"></span>
+                <span class="logout-btn" id="logoutBtn">Выйти</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Логин -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <h2>hck-team</h2>
+            <input type="text" id="loginInput" placeholder="Логин">
+            <input type="password" id="passwordInput" placeholder="Пароль">
+            <button id="loginBtn">Войти</button>
+            <button class="register-btn" id="registerBtn">Регистрация</button>
+            <div id="loginError" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container" id="mainContainer" style="display: none;">
+        <!-- Главная -->
+        <div id="homePage" class="page">
+            <div class="posts-header">
+                <h1>Лента форума</h1>
+            </div>
+            
+            <div id="createPostSection" style="display: none;">
+                <div class="create-post-form">
+                    <textarea id="postContent" placeholder="Новый пост... (только для админа)"></textarea>
+                    <div class="file-upload">
+                        <label for="postImage">📎 Прикрепить фото</label>
+                        <input type="file" id="postImage" accept="image/*">
+                        <div class="file-name" id="fileName">Файл не выбран</div>
+                    </div>
+                    <button id="publishPostBtn">Опубликовать</button>
+                </div>
+            </div>
+
+            <div class="posts-grid" id="postsList"></div>
+        </div>
+
+        <!-- Общий чат -->
+        <div id="generalPage" class="page">
+            <div class="general-chat-page">
+                <h1 style="color: var(--accent-green); margin-bottom: 1rem;">Общий чат</h1>
+                <div class="general-chat-messages" id="generalMessages"></div>
+                <div class="general-chat-input">
+                    <input type="text" id="generalMessageInput" placeholder="Введите сообщение...">
+                    <button id="sendGeneralMessageBtn">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Личные сообщения -->
+        <div id="pmPage" class="page">
+            <div class="pm-page">
+                <div class="pm-sidebar">
+                    <h3>Диалоги</h3>
+                    <div id="pmUsersList"></div>
+                </div>
+                <div class="pm-chat" id="pmChat" style="display: none;">
+                    <div class="pm-chat-header">
+                        <h2 id="pmChatHeader">Выберите собеседника</h2>
+                    </div>
+                    <div class="pm-messages" id="pmMessages"></div>
+                    <div class="pm-input" id="pmInputSection">
+                        <input type="text" id="pmMessageInput" placeholder="Введите сообщение...">
+                        <button id="sendPmMessageBtn">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Пользователи -->
+        <div id="usersPage" class="page">
+            <h1 style="color: var(--accent-green); margin-bottom: 1.5rem;">Все пользователи</h1>
+            <div class="users-grid" id="usersList"></div>
+        </div>
+
+        <!-- Кейсы -->
+        <div id="casesPage" class="page">
+            <div class="cases-page">
+                <div class="cases-sidebar">
+                    <h3>Обращения</h3>
+                    <button class="new-case-btn" id="newCaseBtn">➕ Создать обращение</button>
+                    <div id="casesList"></div>
+                </div>
+                <div class="case-chat" id="caseChat" style="display: none;">
+                    <div class="case-chat-header">
+                        <h2 id="caseChatTitle">Обращение</h2>
+                        <p id="caseChatStatus"></p>
+                    </div>
+                    <div class="case-messages" id="caseMessages"></div>
+                    <div class="case-input" id="caseInputSection">
+                        <input type="text" id="caseMessageInput" placeholder="Введите сообщение...">
+                        <button id="sendCaseMessageBtn">Отправить</button>
+                    </div>
+                    <div class="case-actions" id="caseActions">
+                        <button class="close-case-btn" id="closeCaseBtn">🔒 Закрыть обращение</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Профиль пользователя -->
+        <div id="profilePage" class="page profile-page">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar" onclick="document.getElementById('avatarInput').click()">
+                    <img id="profileAvatarImg" src="" alt="Avatar" style="display: none;">
+                    <span id="profileAvatarText"></span>
+                    <div class="profile-avatar-overlay" id="avatarOverlay">Сменить аватар</div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profileName"></h2>
+                    <p id="profileRole"></p>
+                    <p id="profileJoined"></p>
+                    
+                    <div class="profile-stats">
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profilePostsCount">0</div>
+                            <div class="profile-stat-label">Постов</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profileMessagesCount">0</div>
+                            <div class="profile-stat-label">Сообщений</div>
+                        </div>
+                        <div class="profile-stat">
+                            <div class="profile-stat-value" id="profileCasesCount">0</div>
+                            <div class="profile-stat-label">Обращений</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-actions" id="profileActions">
+                        <!-- Кнопки будут добавляться динамически -->
+                    </div>
+
+                    <div class="avatar-upload" id="avatarUploadSection" style="display: none;">
+                        <input type="file" id="avatarInput" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные
+        let users = JSON.parse(localStorage.getItem('users')) || [
+            { login: 'waxues', password: 'root', role: 'admin', avatar: null, joined: new Date().toISOString() },
+            { login: 'tech', password: 'admin', role: 'tech', avatar: null, joined: new Date().toISOString() },
+            { login: 'seo', password: 'admin', role: 'seo', avatar: null, joined: new Date().toISOString() },
+            { login: 'moder1', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString() },
+            { login: 'moder2', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString() },
+            { login: 'moder3', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString() }
+        ];
+        
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        let generalMessages = JSON.parse(localStorage.getItem('generalMessages')) || [];
+        let privateMessages = JSON.parse(localStorage.getItem('privateMessages')) || {};
+        let cases = JSON.parse(localStorage.getItem('cases')) || [];
+
+        let currentUser = null;
+        let selectedPmUser = null;
+        let viewingProfile = null;
+        let selectedCase = null;
+
+        // Восстанавливаем сессию
+        const savedUser = sessionStorage.getItem('currentUser');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+        }
+
+        function saveUsers() { localStorage.setItem('users', JSON.stringify(users)); }
+        function savePosts() { localStorage.setItem('posts', JSON.stringify(posts)); }
+        function saveGeneralMessages() { localStorage.setItem('generalMessages', JSON.stringify(generalMessages)); }
+        function savePrivateMessages() { localStorage.setItem('privateMessages', JSON.stringify(privateMessages)); }
+        function saveCases() { localStorage.setItem('cases', JSON.stringify(cases)); }
+
+        function getRoleName(role) {
+            const roles = {
+                'admin': 'Главный админ',
+                'tech': 'Тех админ',
+                'seo': 'Сис админ',
+                'moder': 'Модератор',
+                'user': 'Пользователь'
+            };
+            return roles[role] || role;
+        }
+
+        // Обновление UI
+        function updateUI() {
+            const loginPage = document.getElementById('loginPage');
+            const navbar = document.getElementById('navbar');
+            const mainContainer = document.getElementById('mainContainer');
+
+            if (currentUser) {
+                loginPage.style.display = 'none';
+                navbar.style.display = 'block';
+                mainContainer.style.display = 'block';
+                
+                document.getElementById('currentUserName').textContent = currentUser.login;
+                
+                const roleElement = document.getElementById('currentUserRole');
+                roleElement.textContent = getRoleName(currentUser.role);
+                roleElement.className = `user-role role-${currentUser.role}`;
+                
+                document.getElementById('createPostSection').style.display = 
+                    currentUser.role === 'admin' ? 'block' : 'none';
+
+                showPage('home');
+                loadPosts();
+                loadGeneralMessages();
+                loadUsersList();
+                loadPmUsers();
+                loadCasesList();
+            } else {
+                loginPage.style.display = 'flex';
+                navbar.style.display = 'none';
+                mainContainer.style.display = 'none';
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            const targetPage = document.getElementById(pageId + 'Page');
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) link.classList.add('active');
+            });
+
+            if (pageId === 'users') loadUsersList();
+            if (pageId === 'general') loadGeneralMessages();
+            if (pageId === 'pm') loadPmUsers();
+            if (pageId === 'cases') loadCasesList();
+            if (pageId === 'profile') viewProfile(currentUser.login);
+        }
+
+        // Загрузка постов
+        function loadPosts() {
+            const postsList = document.getElementById('postsList');
+            if (!postsList) return;
+            
+            postsList.innerHTML = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).map(post => `
+                <div class="post-card" data-post-id="${post.id}">
+                    <div class="post-header">
+                        <span class="post-author" onclick="viewProfile('${post.author}')">${post.author}</span>
+                        <span class="post-date">${new Date(post.date).toLocaleString()}</span>
+                    </div>
+                    <div class="post-content">${post.content.replace(/</g, '&lt;')}</div>
+                    ${post.image ? `<div class="post-image"><img src="${post.image}" alt="Post image"></div>` : ''}
+                    <div class="post-footer">
+                        ${currentUser?.role === 'admin' ? `
+                            <button class="delete-post-btn" onclick="deletePost('${post.id}')">🗑 Удалить</button>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        window.deletePost = function(postId) {
+            if (currentUser?.role !== 'admin') return;
+            
+            const postIndex = posts.findIndex(p => p.id === postId);
+            if (postIndex !== -1) {
+                posts.splice(postIndex, 1);
+                savePosts();
+                loadPosts();
+            }
+        };
+
+        // Загрузка пользователей
+        function loadUsersList() {
+            const usersList = document.getElementById('usersList');
+            if (!usersList) return;
+            
+            const otherUsers = users.filter(u => u.login !== currentUser?.login);
+            
+            usersList.innerHTML = otherUsers.map(user => `
+                <div class="user-card">
+                    <div class="user-avatar" onclick="viewProfile('${user.login}')">
+                        ${user.avatar ? `<img src="${user.avatar}" alt="Avatar">` : user.login[0].toUpperCase()}
+                    </div>
+                    <div class="user-info" onclick="viewProfile('${user.login}')">
+                        <h3>${user.login}</h3>
+                        <p>${getRoleName(user.role)}</p>
+                    </div>
+                    <div class="message-btn" onclick="startPrivateChat('${user.login}')">💬</div>
+                </div>
+            `).join('');
+        }
+
+        // Просмотр профиля
+        window.viewProfile = function(login) {
+            const user = users.find(u => u.login === login);
+            if (!user) return;
+
+            viewingProfile = user;
+            showPage('profile');
+            
+            document.getElementById('profileName').textContent = user.login;
+            document.getElementById('profileRole').textContent = getRoleName(user.role);
+            document.getElementById('profileJoined').textContent = user.joined ? `На сайте с ${new Date(user.joined).toLocaleDateString()}` : '';
+            
+            // Статистика
+            const userPosts = posts.filter(p => p.author === user.login).length;
+            const userMessages = generalMessages.filter(m => m.from === user.login).length;
+            const userCases = cases.filter(c => c.user === user.login).length;
+            
+            document.getElementById('profilePostsCount').textContent = userPosts;
+            document.getElementById('profileMessagesCount').textContent = userMessages;
+            document.getElementById('profileCasesCount').textContent = userCases;
+            
+            // Аватар
+            const avatarImg = document.getElementById('profileAvatarImg');
+            const avatarText = document.getElementById('profileAvatarText');
+            const avatarOverlay = document.getElementById('avatarOverlay');
+            
+            if (user.avatar) {
+                avatarImg.src = user.avatar;
+                avatarImg.style.display = 'block';
+                avatarText.style.display = 'none';
+            } else {
+                avatarImg.style.display = 'none';
+                avatarText.style.display = 'block';
+                avatarText.textContent = user.login[0].toUpperCase();
+            }
+
+            // Кнопка смены аватара (только для своего профиля)
+            document.getElementById('avatarUploadSection').style.display = 
+                currentUser?.login === login ? 'block' : 'none';
+            
+            avatarOverlay.style.display = currentUser?.login === login ? 'block' : 'none';
+
+            // Кнопки действий
+            const actionsContainer = document.getElementById('profileActions');
+            let actionsHTML = '';
+
+            if (currentUser?.login !== login) {
+                actionsHTML += `
+                    <button class="profile-action-btn profile-message-btn" onclick="startPrivateChat('${login}')">
+                        💬 Написать сообщение
+                    </button>
+                `;
+            }
+
+            // Кнопка бана (для админов)
+            const canBan = currentUser?.role === 'admin' || currentUser?.role === 'tech' || currentUser?.role === 'seo';
+            if (canBan && currentUser?.login !== login && user.role !== 'admin' && user.role !== 'tech' && user.role !== 'seo') {
+                actionsHTML += `
+                    <button class="profile-action-btn profile-ban-btn" onclick="banUser('${login}')">
+                        ⛔ Забанить пользователя
+                    </button>
+                `;
+            }
+
+            actionsContainer.innerHTML = actionsHTML;
+        };
+
+        // Бан пользователя
+        window.banUser = function(login) {
+            if (!viewingProfile || !currentUser) return;
+            
+            if (confirm(`Забанить пользователя ${login}?`)) {
+                const userIndex = users.findIndex(u => u.login === login);
+                if (userIndex !== -1) {
+                    users.splice(userIndex, 1);
+                    saveUsers();
+                    
+                    generalMessages = generalMessages.filter(m => m.from !== login);
+                    saveGeneralMessages();
+                    
+                    Object.keys(privateMessages).forEach(key => {
+                        if (key.includes(login)) {
+                            delete privateMessages[key];
+                        }
+                    });
+                    savePrivateMessages();
+                    
+                    alert(`Пользователь ${login} забанен`);
+                    showPage('users');
+                    loadUsersList();
+                }
+            }
+        };
+
+        // Смена аватара
+        document.getElementById('avatarInput')?.addEventListener('change', (e) => {
+            if (!currentUser) return;
+            
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const user = users.find(u => u.login === currentUser.login);
+                if (user) {
+                    user.avatar = e.target.result;
+                    saveUsers();
+                    
+                    if (viewingProfile?.login === currentUser.login) {
+                        viewProfile(currentUser.login);
+                    }
+                    
+                    loadUsersList();
+                    loadPmUsers();
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // Личные сообщения
+        function loadPmUsers() {
+            if (!currentUser) return;
+
+            const pmUsersList = document.getElementById('pmUsersList');
+            if (!pmUsersList) return;
+
+            const conversations = new Set();
+            
+            Object.keys(privateMessages).forEach(key => {
+                const [user1, user2] = key.split('_');
+                if (user1 === currentUser.login) conversations.add(user2);
+                if (user2 === currentUser.login) conversations.add(user1);
+            });
+
+            pmUsersList.innerHTML = Array.from(conversations).map(login => {
+                const user = users.find(u => u.login === login);
+                if (!user) return '';
+                
+                return `
+                    <div class="pm-user-item ${selectedPmUser === login ? 'active' : ''}" onclick="selectPmUser('${login}')">
+                        <div class="pm-user-avatar">
+                            ${user.avatar ? `<img src="${user.avatar}" alt="">` : login[0].toUpperCase()}
+                        </div>
+                        <span class="pm-user-name">${login}</span>
+                    </div>
+                `;
+            }).join('') || '<p style="color: var(--text-secondary); padding: 1rem;">Нет диалогов</p>';
+        }
+
+        window.selectPmUser = function(login) {
+            selectedPmUser = login;
+            document.getElementById('pmChat').style.display = 'flex';
+            document.getElementById('pmChatHeader').textContent = `Чат с ${login}`;
+            loadPrivateMessages(login);
+        };
+
+        window.startPrivateChat = function(login) {
+            selectedPmUser = login;
+            showPage('pm');
+            loadPmUsers();
+            setTimeout(() => selectPmUser(login), 100);
+        };
+
+        function loadPrivateMessages(otherUser) {
+            if (!currentUser || !otherUser) return;
+
+            const key1 = `${currentUser.login}_${otherUser}`;
+            const key2 = `${otherUser}_${currentUser.login}`;
+            const messages = privateMessages[key1] || privateMessages[key2] || [];
+
+            const container = document.getElementById('pmMessages');
+            if (!container) return;
+            
+            container.innerHTML = messages.map(msg => `
+                <div class="message ${msg.from === currentUser.login ? 'outgoing' : 'incoming'}">
+                    <div class="sender" onclick="viewProfile('${msg.from}')">${msg.from}</div>
+                    <div>${msg.text}</div>
+                    <div class="time">${new Date(msg.timestamp).toLocaleTimeString()}</div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendPrivateMessage() {
+            if (!currentUser || !selectedPmUser) return;
+
+            const input = document.getElementById('pmMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const key = `${currentUser.login}_${selectedPmUser}`;
+            
+            if (!privateMessages[key]) {
+                privateMessages[key] = [];
+            }
+
+            privateMessages[key].push({
+                from: currentUser.login,
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+
+            savePrivateMessages();
+            input.value = '';
+            loadPrivateMessages(selectedPmUser);
+            loadPmUsers();
+        }
+
+        // Общий чат
+        function loadGeneralMessages() {
+            const container = document.getElementById('generalMessages');
+            if (!container) return;
+            
+            container.innerHTML = generalMessages.map(msg => {
+                const user = users.find(u => u.login === msg.from);
+                return `
+                    <div class="message ${msg.from === currentUser?.login ? 'outgoing' : 'incoming'}">
+                        <div class="sender" onclick="viewProfile('${msg.from}')">${msg.from}</div>
+                        <div>${msg.text}</div>
+                        <div class="time">${new Date(msg.timestamp).toLocaleTimeString()}</div>
+                    </div>
+                `;
+            }).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendGeneralMessage() {
+            const input = document.getElementById('generalMessageInput');
+            const text = input.value.trim();
+            if (!text || !currentUser) return;
+
+            generalMessages.push({
+                from: currentUser.login,
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+
+            saveGeneralMessages();
+            input.value = '';
+            loadGeneralMessages();
+        }
+
+        // Кейсы
+        function loadCasesList() {
+            const casesList = document.getElementById('casesList');
+            if (!casesList) return;
+
+            let visibleCases = cases;
+            if (currentUser.role === 'user') {
+                visibleCases = cases.filter(c => c.user === currentUser.login);
+            }
+
+            casesList.innerHTML = visibleCases.map(c => `
+                <div class="case-item ${selectedCase?.id === c.id ? 'active' : ''} ${c.status === 'closed' ? 'closed' : ''}" onclick="selectCase('${c.id}')">
+                    <div class="case-title">${c.title}</div>
+                    <div class="case-preview">${c.messages[c.messages.length-1]?.text || 'Нет сообщений'}</div>
+                    <span class="case-status ${c.status === 'open' ? 'status-open' : 'status-closed'}">
+                        ${c.status === 'open' ? 'Открыт' : 'Закрыт'}
+                    </span>
+                </div>
+            `).join('') || '<p style="color: var(--text-secondary); padding: 1rem;">Нет обращений</p>';
+        }
+
+        window.selectCase = function(caseId) {
+            selectedCase = cases.find(c => c.id === caseId);
+            if (!selectedCase) return;
+
+            document.getElementById('caseChat').style.display = 'flex';
+            document.getElementById('caseChatTitle').textContent = selectedCase.title;
+            document.getElementById('caseChatStatus').textContent = 
+                `Статус: ${selectedCase.status === 'open' ? 'Открыт' : 'Закрыт'} | Автор: ${selectedCase.user}`;
+            
+            loadCaseMessages();
+
+            const canEdit = currentUser.role !== 'user' || selectedCase.user === currentUser.login;
+            document.getElementById('caseInputSection').style.display = canEdit && selectedCase.status === 'open' ? 'flex' : 'none';
+            document.getElementById('caseActions').style.display = 
+                (currentUser.role !== 'user' && selectedCase.status === 'open') ? 'block' : 'none';
+        };
+
+        function loadCaseMessages() {
+            if (!selectedCase) return;
+
+            const container = document.getElementById('caseMessages');
+            container.innerHTML = selectedCase.messages.map(msg => {
+                const user = users.find(u => u.login === msg.from);
+                return `
+                    <div class="message ${msg.from === currentUser?.login ? 'outgoing' : 'incoming'}">
+                        <div class="sender" onclick="viewProfile('${msg.from}')">${msg.from}</div>
+                        <div>${msg.text}</div>
+                        <div class="time">${new Date(msg.timestamp).toLocaleString()}</div>
+                    </div>
+                `;
+            }).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendCaseMessage() {
+            if (!selectedCase || selectedCase.status === 'closed') return;
+
+            const input = document.getElementById('caseMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            selectedCase.messages.push({
+                from: currentUser.login,
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+
+            saveCases();
+            input.value = '';
+            loadCaseMessages();
+            loadCasesList();
+        }
+
+        document.getElementById('newCaseBtn')?.addEventListener('click', () => {
+            if (!currentUser) return;
+
+            const title = prompt('Кратко опишите проблему:');
+            if (!title) return;
+
+            const newCase = {
+                id: Date.now().toString(),
+                user: currentUser.login,
+                title: title,
+                messages: [{
+                    from: currentUser.login,
+                    text: 'Создано новое обращение',
+                    timestamp: new Date().toISOString()
+                }],
+                status: 'open',
+                createdAt: new Date().toISOString()
+            };
+
+            cases.push(newCase);
+            saveCases();
+            loadCasesList();
+            selectCase(newCase.id);
+        });
+
+        document.getElementById('closeCaseBtn')?.addEventListener('click', () => {
+            if (!selectedCase || currentUser.role === 'user') return;
+
+            selectedCase.status = 'closed';
+            saveCases();
+            loadCasesList();
+            selectCase(selectedCase.id);
+        });
+
+        // Инициализация
+        function init() {
+            if (posts.length === 0) {
+                posts.push({
+                    id: Date.now().toString(),
+                    author: 'waxues',
+                    content: 'Добро пожаловать на обновленный форум!',
+                    date: new Date().toISOString()
+                });
+                savePosts();
+            }
+
+            users.forEach(u => {
+                if (!u.joined) u.joined = new Date().toISOString();
+            });
+            saveUsers();
+
+            updateUI();
+        }
+
+        // Обработчики
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.nav-links a')) {
+                e.preventDefault();
+                showPage(e.target.dataset.page);
+            }
+
+            if (e.target.id === 'loginBtn') {
+                const login = document.getElementById('loginInput').value;
+                const password = document.getElementById('passwordInput').value;
+                
+                const user = users.find(u => u.login === login && u.password === password);
+
+                if (user) {
+                    currentUser = { login: user.login, role: user.role };
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    updateUI();
+                    loadPosts();
+                    document.getElementById('loginError').textContent = '';
+                } else {
+                    document.getElementById('loginError').textContent = 'Неверный логин или пароль';
+                }
+            }
+
+            if (e.target.id === 'registerBtn') {
+                const login = document.getElementById('loginInput').value;
+                const password = document.getElementById('passwordInput').value;
+                
+                if (!login || !password) {
+                    document.getElementById('loginError').textContent = 'Заполните поля';
+                    return;
+                }
+
+                if (users.find(u => u.login === login)) {
+                    document.getElementById('loginError').textContent = 'Уже существует';
+                    return;
+                }
+
+                users.push({ 
+                    login, 
+                    password, 
+                    role: 'user',
+                    joined: new Date().toISOString(),
+                    avatar: null
+                });
+                saveUsers();
+                document.getElementById('loginError').textContent = 'Регистрация успешна! Войдите.';
+            }
+
+            if (e.target.id === 'logoutBtn') {
+                currentUser = null;
+                selectedPmUser = null;
+                viewingProfile = null;
+                selectedCase = null;
+                sessionStorage.removeItem('currentUser');
+                updateUI();
+            }
+
+            if (e.target.id === 'publishPostBtn') {
+                if (!currentUser || currentUser.role !== 'admin') return;
+                
+                const content = document.getElementById('postContent').value;
+                if (!content) return;
+
+                const fileInput = document.getElementById('postImage');
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        posts.push({
+                            id: Date.now().toString(),
+                            author: currentUser.login,
+                            content: content,
+                            image: e.target.result,
+                            date: new Date().toISOString()
+                        });
+                        savePosts();
+                        document.getElementById('postContent').value = '';
+                        fileInput.value = '';
+                        document.getElementById('fileName').textContent = 'Файл не выбран';
+                        loadPosts();
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    posts.push({
+                        id: Date.now().toString(),
+                        author: currentUser.login,
+                        content: content,
+                        date: new Date().toISOString()
+                    });
+                    savePosts();
+                    document.getElementById('postContent').value = '';
+                    loadPosts();
+                }
+            }
+
+            if (e.target.id === 'sendGeneralMessageBtn') {
+                sendGeneralMessage();
+            }
+
+            if (e.target.id === 'sendPmMessageBtn') {
+                sendPrivateMessage();
+            }
+
+            if (e.target.id === 'sendCaseMessageBtn') {
+                sendCaseMessage();
+            }
+        });
+
+        document.getElementById('postImage')?.addEventListener('change', (e) => {
+            const fileName = e.target.files[0]?.name || 'Файл не выбран';
+            document.getElementById('fileName').textContent = fileName;
+        });
+
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                if (e.target.id === 'generalMessageInput') {
+                    sendGeneralMessage();
+                }
+                if (e.target.id === 'pmMessageInput') {
+                    sendPrivateMessage();
+                }
+                if (e.target.id === 'caseMessageInput') {
+                    sendCaseMessage();
+                }
+            }
+        });
+
+        init();
+    </script>
+</body>
+</html>
