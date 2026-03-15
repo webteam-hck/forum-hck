@@ -1365,7 +1365,7 @@
                     <a data-page="users">Люди</a>
                     <a data-page="cases">Кейсы</a>
                     <a data-page="profile">Профиль</a>
-                    <a data-page="admin" id="adminLink" style="display: none;">Админка</a>
+                    <a data-page="admin" id="adminLink">Админка</a>
                 </div>
             </div>
         </div>
@@ -1396,8 +1396,8 @@
                 <h1>hck-forum</h1>
             </div>
 
-            <!-- Создание поста (только для админа) -->
-            <div id="createPostSection" class="create-post-section" style="display: none;">
+            <!-- Создание поста (только для владельца) -->
+            <div id="createPostSection" class="create-post-section">
                 <h2>Создать объявление</h2>
                 <div class="create-post-form">
                     <textarea id="postContent" placeholder="Текст нового поста..."></textarea>
@@ -1519,7 +1519,7 @@
 
                     <div class="profile-actions" id="profileActions"></div>
 
-                    <div class="avatar-upload" id="avatarUploadSection" style="display: none;">
+                    <div class="avatar-upload" id="avatarUploadSection">
                         <label for="avatarInput">📸 Выбрать фото</label>
                         <input type="file" id="avatarInput" accept="image/*">
                     </div>
@@ -1668,20 +1668,13 @@
                 roleElement.textContent = getRoleName(currentUser.role);
                 roleElement.className = `user-role role-${currentUser.role}`;
                 
-                // Показываем ссылку на админку только для owner
+                // Показываем/скрываем админку и создание постов в зависимости от роли
                 if (currentUser.role === 'owner') {
                     adminLink.style.display = 'inline-block';
-                    console.log('✅ Админ ссылка показана для', currentUser.login);
+                    document.getElementById('createPostSection').style.display = 'block';
                 } else {
                     adminLink.style.display = 'none';
-                }
-                
-                document.getElementById('createPostSection').style.display = 
-                    currentUser.role === 'owner' ? 'block' : 'none';
-
-                // Если мы на странице админки, но не owner - перенаправляем на главную
-                if (document.getElementById('adminPage').classList.contains('active') && currentUser.role !== 'owner') {
-                    showPage('home');
+                    document.getElementById('createPostSection').style.display = 'none';
                 }
 
                 showPage('home');
@@ -1717,9 +1710,13 @@
             if (pageId === 'pm') loadPmUsers();
             if (pageId === 'cases') loadCasesList();
             if (pageId === 'profile') viewProfile(currentUser.login);
-            if (pageId === 'admin' && currentUser?.role === 'owner') {
-                console.log('📊 Загружаем админ панель');
-                loadAdminPanel();
+            if (pageId === 'admin') {
+                if (currentUser?.role === 'owner') {
+                    loadAdminPanel();
+                } else {
+                    alert('У вас нет доступа к админ панели');
+                    showPage('home');
+                }
             }
         }
 
@@ -1860,7 +1857,7 @@
             }
         };
 
-        // ИСПРАВЛЕННАЯ загрузка аватара
+        // Загрузка аватара
         document.getElementById('avatarInput')?.addEventListener('change', function(e) {
             if (!currentUser) {
                 alert('Сначала войдите в систему');
@@ -2130,11 +2127,9 @@
             if (currentUser?.role === 'owner') loadAdminPanel();
         });
 
-        // Админ панель с галочками для ролей
+        // Админ панель
         function loadAdminPanel() {
             if (currentUser?.role !== 'owner') return;
-
-            console.log('📊 Загружаем данные админ панели');
 
             // Статистика
             document.getElementById('totalUsers').textContent = users.length;
@@ -2142,7 +2137,7 @@
             document.getElementById('totalCases').textContent = cases.length;
             document.getElementById('totalMessages').textContent = generalMessages.length + Object.keys(privateMessages).length;
 
-            // Таблица пользователей с галочками
+            // Таблица пользователей
             const usersTableBody = document.getElementById('usersTableBody');
             usersTableBody.innerHTML = users.map(user => {
                 const isOwner = user.role === 'owner';
@@ -2154,8 +2149,7 @@
                 return `
                 <tr>
                     <td>
-                        <img src="${user.avatar || ''}" class="user-avatar-small" style="${!user.avatar ? 'display: none;' : ''}" onerror="this.style.display='none'">
-                        <span style="${user.avatar ? 'display: none;' : ''}">${user.login[0].toUpperCase()}</span>
+                        ${user.avatar ? `<img src="${user.avatar}" class="user-avatar-small">` : '📷'}
                     </td>
                     <td>${user.login}</td>
                     <td>
@@ -2185,7 +2179,7 @@
                     <td>
                         ${user.login !== 'waxues' ? `
                             <button class="admin-btn" onclick="banUser('${user.login}')">Забанить</button>
-                        ` : ''}
+                        ` : '—'}
                     </td>
                 </tr>
             `}).join('');
@@ -2217,8 +2211,6 @@
                     </td>
                 </tr>
             `).join('');
-
-            console.log('✅ Админ панель загружена');
         }
 
         window.changeUserRole = function(login, newRole) {
