@@ -23,7 +23,6 @@
             --text-secondary: #a0b0a0;
             --danger: #ff5555;
             --warning: #ffaa00;
-            --success: #00ff88;
             --role-admin: #ff00ff;
             --role-tech: #00ffff;
             --role-seo: #ffff00;
@@ -51,13 +50,13 @@
             z-index: -1;
         }
 
-        /* Навигация - адаптирована для мобильных */
+        /* Навигация - полностью переделана для мобильных */
         .navbar {
             background: rgba(10, 20, 10, 0.98);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border-green);
-            padding: 0.5rem 0.8rem;
+            padding: 0.5rem 0.5rem;
             position: fixed;
             top: 0;
             left: 0;
@@ -67,42 +66,40 @@
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
         }
 
         .nav-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            width: 100%;
+            padding: 0 0.3rem 0.5rem 0.3rem;
+            border-bottom: 1px solid var(--border-green);
         }
 
         .logo {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--accent-green);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 15px var(--accent-green);
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px var(--accent-green);
             cursor: pointer;
+            white-space: nowrap;
         }
 
         .logo span {
             color: white;
-            text-shadow: 0 0 10px white;
         }
 
         .user-info {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.3rem;
             background: rgba(0, 255, 136, 0.05);
-            padding: 0.3rem 0.8rem;
-            border-radius: 30px;
+            padding: 0.2rem 0.5rem;
+            border-radius: 20px;
             border: 1px solid var(--border-green);
             flex-wrap: nowrap;
         }
@@ -110,18 +107,18 @@
         .user-name {
             color: var(--accent-green);
             font-weight: 600;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             cursor: pointer;
             white-space: nowrap;
-            max-width: 80px;
+            max-width: 60px;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .user-role {
-            padding: 0.2rem 0.5rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
+            padding: 0.1rem 0.4rem;
+            border-radius: 12px;
+            font-size: 0.6rem;
             border: 1px solid;
             font-weight: 600;
             white-space: nowrap;
@@ -157,26 +154,39 @@
             background: rgba(255, 85, 85, 0.1);
             border: 1px solid var(--danger);
             color: var(--danger);
-            padding: 0.2rem 0.6rem;
-            border-radius: 15px;
+            padding: 0.1rem 0.4rem;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             transition: 0.3s;
             white-space: nowrap;
+        }
+
+        /* Горизонтальный скролл для табов */
+        .nav-links-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding: 0.5rem 0.3rem 0.2rem 0.3rem;
+        }
+
+        .nav-links-wrapper::-webkit-scrollbar {
+            display: none;
         }
 
         .nav-links {
             display: flex;
             gap: 0.3rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            width: 100%;
+            flex-wrap: nowrap;
+            width: max-content;
+            min-width: 100%;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
-            padding: 0.4rem 0.6rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 20px;
             font-weight: 500;
             transition: 0.3s;
@@ -184,19 +194,20 @@
             font-size: 0.75rem;
             border: 1px solid transparent;
             white-space: nowrap;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .nav-links a:hover,
         .nav-links a.active {
-            background: rgba(0, 255, 136, 0.1);
+            background: rgba(0, 255, 136, 0.15);
             color: var(--accent-green);
             border-color: var(--accent-green);
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 110px 0.8rem 1rem 0.8rem;
+            padding: 90px 0.5rem 1rem 0.5rem;
             min-height: 100vh;
         }
 
@@ -221,8 +232,8 @@
             border-radius: 30px;
             padding: 1.5rem;
             width: 100%;
-            max-width: 350px;
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+            max-width: 320px;
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.3);
         }
 
         .login-container h2 {
@@ -243,7 +254,6 @@
             border-radius: 15px;
             color: white;
             font-size: 0.95rem;
-            transition: 0.3s;
             outline: none;
         }
 
@@ -257,15 +267,20 @@
             font-weight: 700;
             font-size: 1rem;
             cursor: pointer;
-            transition: 0.3s;
             margin-bottom: 0.5rem;
+        }
+
+        .login-container .register-btn {
+            background: transparent;
+            border: 2px solid var(--accent-green);
+            color: var(--accent-green);
         }
 
         .error-message {
             color: var(--danger);
             text-align: center;
+            font-size: 0.85rem;
             min-height: 20px;
-            font-size: 0.9rem;
         }
 
         .page {
@@ -282,18 +297,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Главная страница - исправлено для мобильных */
+        /* Главная страница */
         .posts-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
         .posts-header h1 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--accent-green);
         }
 
@@ -307,7 +320,7 @@
 
         .create-post-form textarea {
             width: 100%;
-            min-height: 80px;
+            min-height: 70px;
             background: var(--bg-input);
             border: 1px solid var(--border-green);
             border-radius: 12px;
@@ -325,20 +338,19 @@
 
         .file-upload label {
             display: inline-block;
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 1rem;
             background: var(--bg-input);
             border: 1px solid var(--border-green);
             border-radius: 12px;
             color: var(--accent-green);
             cursor: pointer;
-            transition: 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .file-name {
             margin-top: 0.3rem;
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         .create-post-form button {
@@ -347,9 +359,8 @@
             font-weight: 700;
             border: none;
             border-radius: 12px;
-            padding: 0.6rem 1.5rem;
+            padding: 0.6rem;
             cursor: pointer;
-            transition: 0.3s;
             font-size: 0.95rem;
             width: 100%;
         }
@@ -365,7 +376,6 @@
             border: 1px solid var(--border-green);
             border-radius: 15px;
             padding: 1rem;
-            transition: 0.3s;
         }
 
         .post-header {
@@ -373,8 +383,6 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 0.8rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
         }
 
         .post-author {
@@ -386,14 +394,14 @@
 
         .post-date {
             color: var(--text-secondary);
-            font-size: 0.75rem;
+            font-size: 0.7rem;
         }
 
         .post-content {
             line-height: 1.5;
             color: var(--text-primary);
             margin-bottom: 0.8rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             word-break: break-word;
         }
 
@@ -408,24 +416,17 @@
             border-radius: 12px;
         }
 
-        .post-footer {
-            display: flex;
-            gap: 0.8rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
         .delete-post-btn {
             background: rgba(255, 85, 85, 0.1);
             border: 1px solid var(--danger);
             color: var(--danger);
             padding: 0.3rem 0.8rem;
             border-radius: 15px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             cursor: pointer;
         }
 
-        /* Пользователи - сетка для мобильных */
+        /* Пользователи */
         .users-grid {
             display: grid;
             grid-template-columns: 1fr;
@@ -481,7 +482,7 @@
         
         .user-info p {
             color: var(--text-secondary);
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -502,7 +503,7 @@
             flex-shrink: 0;
         }
 
-        /* Профиль - адаптирован */
+        /* Профиль */
         .profile-page {
             max-width: 100%;
         }
@@ -531,7 +532,6 @@
             color: black;
             cursor: pointer;
             overflow: hidden;
-            position: relative;
             flex-shrink: 0;
         }
 
@@ -548,14 +548,14 @@
 
         .profile-info h2 {
             color: var(--accent-green);
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 0.3rem;
         }
 
         .profile-info p {
             color: var(--text-secondary);
             margin-bottom: 0.3rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .profile-stats {
@@ -572,7 +572,7 @@
         }
 
         .profile-stat-label {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: var(--text-secondary);
         }
 
@@ -588,7 +588,7 @@
             border-radius: 12px;
             font-weight: 600;
             cursor: pointer;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             width: 100%;
         }
 
@@ -604,9 +604,9 @@
             color: var(--danger);
         }
 
-        /* Чаты - адаптированы */
+        /* Общий чат */
         .general-chat-page {
-            height: calc(100vh - 130px);
+            height: calc(100vh - 110px);
             display: flex;
             flex-direction: column;
         }
@@ -652,12 +652,12 @@
             white-space: nowrap;
         }
 
-        /* PM - адаптирован */
+        /* Личные сообщения */
         .pm-page {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            height: calc(100vh - 130px);
+            gap: 0.8rem;
+            height: calc(100vh - 110px);
         }
 
         .pm-sidebar {
@@ -665,7 +665,7 @@
             border: 1px solid var(--border-green);
             border-radius: 15px;
             padding: 0.8rem;
-            max-height: 150px;
+            max-height: 130px;
             overflow-y: auto;
         }
 
@@ -751,12 +751,12 @@
             cursor: pointer;
         }
 
-        /* Кейсы - адаптированы */
+        /* Кейсы */
         .cases-page {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
-            height: calc(100vh - 130px);
+            gap: 0.8rem;
+            height: calc(100vh - 110px);
         }
 
         .cases-sidebar {
@@ -764,7 +764,7 @@
             border: 1px solid var(--border-green);
             border-radius: 15px;
             padding: 0.8rem;
-            max-height: 150px;
+            max-height: 130px;
             overflow-y: auto;
         }
 
@@ -776,7 +776,7 @@
 
         .new-case-btn {
             width: 100%;
-            padding: 0.7rem;
+            padding: 0.6rem;
             background: rgba(0, 255, 136, 0.1);
             border: 1px solid var(--accent-green);
             border-radius: 10px;
@@ -784,14 +784,14 @@
             font-weight: 700;
             cursor: pointer;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .case-item {
             background: var(--bg-input);
             border: 1px solid var(--border-green);
             border-radius: 10px;
-            padding: 0.7rem;
+            padding: 0.6rem;
             margin-bottom: 0.5rem;
             cursor: pointer;
         }
@@ -799,12 +799,11 @@
         .case-title {
             font-weight: 700;
             color: var(--accent-green);
-            margin-bottom: 0.2rem;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .case-preview {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             white-space: nowrap;
             overflow: hidden;
@@ -871,13 +870,14 @@
 
         .close-case-btn {
             width: 100%;
-            padding: 0.7rem;
+            padding: 0.6rem;
             background: rgba(255, 85, 85, 0.1);
             border: 1px solid var(--danger);
             border-radius: 10px;
             color: var(--danger);
             font-weight: 700;
             cursor: pointer;
+            font-size: 0.85rem;
         }
 
         .message {
@@ -885,7 +885,7 @@
             padding: 0.6rem;
             border-radius: 12px;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             word-break: break-word;
         }
         
@@ -900,37 +900,37 @@
         }
 
         .message .sender {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--accent-green);
             margin-bottom: 0.2rem;
             cursor: pointer;
         }
 
         .message .time {
-            font-size: 0.6rem;
+            font-size: 0.55rem;
             color: var(--text-secondary);
             margin-top: 0.2rem;
             text-align: right;
         }
 
-        /* Поддержка iPhone с вырезом */
+        /* Поддержка iPhone */
         @supports (padding: max(0px)) {
             .navbar {
                 padding-top: max(0.5rem, env(safe-area-inset-top));
-                padding-left: max(0.8rem, env(safe-area-inset-left));
-                padding-right: max(0.8rem, env(safe-area-inset-right));
+                padding-left: max(0.5rem, env(safe-area-inset-left));
+                padding-right: max(0.5rem, env(safe-area-inset-right));
             }
             
             .container {
-                padding-top: max(110px, calc(110px + env(safe-area-inset-top)));
-                padding-left: max(0.8rem, env(safe-area-inset-left));
-                padding-right: max(0.8rem, env(safe-area-inset-right));
+                padding-top: max(95px, calc(95px + env(safe-area-inset-top)));
+                padding-left: max(0.5rem, env(safe-area-inset-left));
+                padding-right: max(0.5rem, env(safe-area-inset-right));
                 padding-bottom: max(1rem, env(safe-area-inset-bottom));
             }
         }
 
         ::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
 
         ::-webkit-scrollbar-track {
@@ -939,7 +939,7 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--accent-green);
-            border-radius: 4px;
+            border-radius: 3px;
         }
     </style>
 </head>
@@ -955,13 +955,15 @@
                     <span class="logout-btn" id="logoutBtn">Выйти</span>
                 </div>
             </div>
-            <div class="nav-links" id="navLinks">
-                <a data-page="home">Главная</a>
-                <a data-page="general">Чат</a>
-                <a data-page="pm">ЛС</a>
-                <a data-page="users">Люди</a>
-                <a data-page="cases">Кейсы</a>
-                <a data-page="profile">Профиль</a>
+            <div class="nav-links-wrapper">
+                <div class="nav-links" id="navLinks">
+                    <a data-page="home">Главная</a>
+                    <a data-page="general">Общий чат</a>
+                    <a data-page="pm">Личные сообщения</a>
+                    <a data-page="users">Пользователи</a>
+                    <a data-page="cases">Кейсы</a>
+                    <a data-page="profile">Мой профиль</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -973,7 +975,7 @@
             <input type="text" id="loginInput" placeholder="Логин">
             <input type="password" id="passwordInput" placeholder="Пароль">
             <button id="loginBtn">Войти</button>
-            <button class="register-btn" id="registerBtn" style="background: transparent; border: 2px solid var(--accent-green); color: var(--accent-green);">Регистрация</button>
+            <button class="register-btn" id="registerBtn">Регистрация</button>
             <div id="loginError" class="error-message"></div>
         </div>
     </div>
@@ -1004,11 +1006,10 @@
         <!-- Общий чат -->
         <div id="generalPage" class="page">
             <div class="general-chat-page">
-                <h1 style="color: var(--accent-green); margin-bottom: 0.5rem; font-size: 1.3rem;">Общий чат</h1>
                 <div class="general-chat-messages" id="generalMessages"></div>
                 <div class="general-chat-input">
                     <input type="text" id="generalMessageInput" placeholder="Сообщение...">
-                    <button id="sendGeneralMessageBtn">➤</button>
+                    <button id="sendGeneralMessageBtn">Отправить</button>
                 </div>
             </div>
         </div>
@@ -1027,7 +1028,7 @@
                     <div class="pm-messages" id="pmMessages"></div>
                     <div class="pm-input" id="pmInputSection">
                         <input type="text" id="pmMessageInput" placeholder="Сообщение...">
-                        <button id="sendPmMessageBtn">➤</button>
+                        <button id="sendPmMessageBtn">Отправить</button>
                     </div>
                 </div>
             </div>
@@ -1035,7 +1036,7 @@
 
         <!-- Пользователи -->
         <div id="usersPage" class="page">
-            <h1 style="color: var(--accent-green); margin-bottom: 0.8rem; font-size: 1.3rem;">Все пользователи</h1>
+            <h1 style="color: var(--accent-green); margin-bottom: 0.8rem; font-size: 1.3rem;">Пользователи</h1>
             <div class="users-grid" id="usersList"></div>
         </div>
 
@@ -1044,21 +1045,21 @@
             <div class="cases-page">
                 <div class="cases-sidebar">
                     <h3>Обращения</h3>
-                    <button class="new-case-btn" id="newCaseBtn">➕ Создать</button>
+                    <button class="new-case-btn" id="newCaseBtn">➕ Создать обращение</button>
                     <div id="casesList"></div>
                 </div>
                 <div class="case-chat" id="caseChat" style="display: none;">
                     <div class="case-chat-header">
                         <h2 id="caseChatTitle">Обращение</h2>
-                        <p id="caseChatStatus" style="font-size: 0.8rem;"></p>
+                        <p id="caseChatStatus" style="font-size: 0.75rem;"></p>
                     </div>
                     <div class="case-messages" id="caseMessages"></div>
                     <div class="case-input" id="caseInputSection">
                         <input type="text" id="caseMessageInput" placeholder="Сообщение...">
-                        <button id="sendCaseMessageBtn">➤</button>
+                        <button id="sendCaseMessageBtn">Отправить</button>
                     </div>
                     <div class="case-actions" id="caseActions">
-                        <button class="close-case-btn" id="closeCaseBtn">🔒 Закрыть</button>
+                        <button class="close-case-btn" id="closeCaseBtn">🔒 Закрыть обращение</button>
                     </div>
                 </div>
             </div>
@@ -1083,7 +1084,7 @@
                         </div>
                         <div class="profile-stat">
                             <div class="profile-stat-value" id="profileMessagesCount">0</div>
-                            <div class="profile-stat-label">Чата</div>
+                            <div class="profile-stat-label">Сообщ</div>
                         </div>
                         <div class="profile-stat">
                             <div class="profile-stat-value" id="profileCasesCount">0</div>
@@ -1284,7 +1285,7 @@
             if (currentUser?.login !== login) {
                 actionsHTML += `
                     <button class="profile-action-btn profile-message-btn" onclick="startPrivateChat('${login}')">
-                        💬 Написать
+                        💬 Написать сообщение
                     </button>
                 `;
             }
@@ -1302,7 +1303,7 @@
         };
 
         window.banUser = function(login) {
-            if (confirm(`Забанить ${login}?`)) {
+            if (confirm(`Забанить пользователя ${login}?`)) {
                 users = users.filter(u => u.login !== login);
                 saveUsers();
                 generalMessages = generalMessages.filter(m => m.from !== login);
@@ -1526,7 +1527,7 @@
         document.getElementById('newCaseBtn')?.addEventListener('click', () => {
             if (!currentUser) return;
 
-            const title = prompt('Опишите проблему:');
+            const title = prompt('Кратко опишите проблему:');
             if (!title) return;
 
             const newCase = {
@@ -1592,6 +1593,7 @@
                     currentUser = { login: user.login, role: user.role };
                     sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
                     updateUI();
+                    loadPosts();
                     document.getElementById('loginError').textContent = '';
                 } else {
                     document.getElementById('loginError').textContent = 'Неверный логин или пароль';
@@ -1625,6 +1627,9 @@
 
             if (e.target.id === 'logoutBtn') {
                 currentUser = null;
+                selectedPmUser = null;
+                viewingProfile = null;
+                selectedCase = null;
                 sessionStorage.removeItem('currentUser');
                 updateUI();
             }
@@ -1704,4 +1709,4 @@
         init();
     </script>
 </body>
-                            </html>
+                                                                                                   </html>
