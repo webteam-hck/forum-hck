@@ -369,6 +369,1467 @@
             align-items: center;
             padding: 1rem;
             background: var(--bg-dark);
+            z-index: 2000;
+        }
+
+        .login-container {
+            background: rgba(10, 20, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--accent-green);
+            border-radius: 30px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
+            text-align: center;
+        }
+
+        .login-container h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 15px var(--accent-green);
+        }
+
+        .login-container h1 span {
+            color: white;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .login-quote {
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+            padding: 0.8rem;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 15px;
+            border: 1px solid var(--border-green);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border-green);
+            border-radius: 15px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .login-input:focus {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent-green);
+            border: none;
+            border-radius: 15px;
+            color: black;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 0.8rem;
+        }
+
+        .login-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px var(--accent-green);
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 1rem;
+            background: transparent;
+            border: 2px solid var(--accent-green);
+            border-radius: 15px;
+            color: var(--accent-green);
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .error-message {
+            color: var(--danger);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            min-height: 20px;
+        }
+
+        .success-message {
+            color: var(--accent-green);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .warning-message {
+            color: var(--warning);
+            text-align: center;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        /* Страница верификации */
+        .verification-page {
+            padding: 1rem 0;
+        }
+
+        .pending-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1rem;
+            transition: 0.3s;
+        }
+
+        .pending-card:hover {
+            border-color: var(--accent-green);
+            transform: translateX(5px);
+        }
+
+        .pending-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-green);
+        }
+
+        .pending-login {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .pending-tg {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            background: var(--bg-input);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+        }
+
+        .pending-time {
+            color: var(--text-secondary);
+            font-size: 0.7rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .pending-actions {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 0.8rem;
+        }
+
+        .approve-btn {
+            padding: 0.5rem 1.2rem;
+            background: rgba(0, 255, 136, 0.15);
+            border: 1px solid var(--accent-green);
+            border-radius: 12px;
+            color: var(--accent-green);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .approve-btn:hover {
+            background: rgba(0, 255, 136, 0.3);
+            transform: scale(1.02);
+        }
+
+        .reject-btn {
+            padding: 0.5rem 1.2rem;
+            background: rgba(255, 85, 85, 0.15);
+            border: 1px solid var(--danger);
+            border-radius: 12px;
+            color: var(--danger);
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .reject-btn:hover {
+            background: rgba(255, 85, 85, 0.3);
+            transform: scale(1.02);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        /* Главная страница и остальные стили - компактная версия */
+        .posts-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .posts-header h1 { font-size: 1.4rem; color: var(--accent-green); }
+        .create-post-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .create-post-section h2 { color: var(--accent-green); font-size: 1.2rem; margin-bottom: 1rem; }
+        .create-post-form { display: flex; flex-direction: column; gap: 1rem; }
+        .create-post-form textarea {
+            width: 100%;
+            min-height: 80px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 12px;
+            padding: 0.8rem;
+            color: white;
+            resize: vertical;
+            outline: none;
+        }
+        .file-upload { display: flex; flex-direction: column; gap: 0.5rem; }
+        .file-upload label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 12px;
+            color: var(--accent-green);
+            cursor: pointer;
+            width: fit-content;
+        }
+        .file-name { color: var(--text-secondary); font-size: 0.8rem; }
+        .create-post-form button {
+            background: var(--accent-green);
+            color: black;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            padding: 0.7rem;
+            cursor: pointer;
+        }
+        .posts-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+        }
+        .posts-section h2 { color: var(--accent-green); font-size: 1.2rem; margin-bottom: 1rem; }
+        .posts-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+        .post-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            padding: 1rem;
+        }
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+        .post-author {
+            font-weight: 700;
+            color: var(--accent-green);
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+        .post-date { color: var(--text-secondary); font-size: 0.7rem; }
+        .post-content { line-height: 1.5; color: var(--text-primary); margin-bottom: 0.8rem; font-size: 0.9rem; word-break: break-word; }
+        .post-image { max-width: 100%; border-radius: 12px; margin: 0.8rem 0; }
+        .post-image img { max-width: 100%; border-radius: 12px; }
+        .delete-post-btn {
+            background: rgba(255, 85, 85, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .users-header { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1rem; }
+        .users-header h1 { color: var(--accent-green); font-size: 1.3rem; }
+        .filter-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .filter-btn {
+            padding: 0.4rem 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+        }
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(0, 255, 136, 0.15);
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+        .users-grid { display: grid; grid-template-columns: 1fr; gap: 0.8rem; }
+        .user-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 15px;
+            padding: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            color: black;
+            cursor: pointer;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 2px solid var(--border-green);
+        }
+        .user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .user-info-card { flex: 1; cursor: pointer; min-width: 0; }
+        .user-info-card h3 { color: var(--accent-green); margin-bottom: 0.2rem; font-size: 1rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .user-info-card p { color: var(--text-secondary); font-size: 0.75rem; }
+        .message-btn {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .profile-page { max-width: 100%; }
+        .profile-header {
+            background: var(--bg-card);
+            border: 1px solid var(--border-green);
+            border-radius: 20px;
+            padding: 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 2.5rem;
+            color: black;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid var(--border-green);
+        }
+        .profile-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .profile-avatar-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: var(--accent-green);
+            padding: 0.3rem;
+            font-size: 0.7rem;
+            text-align: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+        .profile-avatar:hover .profile-avatar-overlay { opacity: 1; }
+        .profile-info { width: 100%; text-align: center; }
+        .profile-info h2 { color: var(--accent-green); font-size: 1.6rem; margin-bottom: 0.3rem; }
+        .profile-info p { color: var(--text-secondary); margin-bottom: 0.3rem; font-size: 0.9rem; }
+        .profile-stats { display: flex; justify-content: space-around; margin: 1rem 0; gap: 0.5rem; }
+        .profile-stat-value { font-size: 1.2rem; color: var(--accent-green); font-weight: 700; }
+        .profile-stat-label { font-size: 0.7rem; color: var(--text-secondary); }
+        .profile-actions { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+        .profile-action-btn { padding: 0.7rem; border-radius: 12px; font-weight: 600; cursor: pointer; font-size: 0.9rem; width: 100%; }
+        .profile-message-btn { background: rgba(0, 255, 136, 0.1); border: 1px solid var(--accent-green); color: var(--accent-green); }
+        .profile-ban-btn { background: rgba(255, 85, 85, 0.1); border: 1px solid var(--danger); color: var(--danger); }
+        .avatar-upload { margin-top: 1rem; }
+        .avatar-upload label {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--bg-input);
+            border: 1px solid var(--border-green);
+            border-radius: 12px;
+            color: var(--accent-green);
+            cursor: pointer;
+        }
+        .avatar-upload input { display: none; }
+        .general-chat-page { height: calc(100vh - 110px); display: flex; flex-direction: column; }
+        .general-chat-messages { flex: 1; background: var(--bg-card); border: 1px solid var(--border-green); border-radius: 15px; padding: 0.8rem; overflow-y: auto; margin-bottom: 0.8rem; }
+        .general-chat-input { display: flex; gap: 0.5rem; background: var(--bg-card); border: 1px solid var(--border-green); border-radius: 15px; padding: 0.8rem; }
+        .general-chat-input input { flex: 1; padding: 0.7rem; background: var(--bg-input); border: 1px solid var(--border-green); border-radius: 12px; color: white; outline: none; }
+        .general-chat-input button { padding: 0.7rem 1.2rem; background: var(--accent-green); border: none; border-radius: 12px; color: black; font-weight: 700; cursor: pointer; }
+        .pm-page { display: flex; flex-direction: column; gap: 0.8rem; height: calc(100vh - 110px); }
+        .pm-sidebar { background: var(--bg-card); border: 1px solid var(--border-green); border-radius: 15px; padding: 0.8rem; max-height: 130px; overflow-y: auto; }
+        .pm-sidebar h3 { color: var(--accent-green); margin-bottom: 0.5rem; font-size: 1rem; }
+        .pm-user-item { display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; border-radius: 10px; cursor: pointer; border: 1px solid transparent; }
+        .pm-user-item:hover, .pm-user-item.active { background: rgba(0, 255, 136, 0.1); border-color: var(--accent-green); }
+        .pm-user-avatar { width: 30px; height: 30px; background: var(--accent-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; overflow: hidden; flex-shrink: 0; }
+        .pm-user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .pm-user-name { flex: 1; color: var(--accent-green); }
+        .pm-chat { background: var(--bg-card); border: 1px solid var(--border-green); border-radius: 15px; display: flex; flex-direction: column; height: 100%; }
+        .pm-chat-header { padding: 0.8rem; border-bottom: 1px solid var(--border-green); }
+        .pm-chat-header h2 { color: var(--accent-green); font-size: 1rem; }
+        .pm-messages { flex: 1; padding: 0.8rem; overflow-y: auto; }
+        .pm-input { padding: 0.8rem; border-top: 1px solid var(--border-green); display: flex; gap: 0.5rem; }
+        .pm-input input { flex: 1; padding: 0.7rem; background: var(--bg-input); border: 1px solid var(--border-green); border-radius: 10px; color: white; }
+        .pm-input button { padding: 0.7rem 1rem; background: var(--accent-green); border: none; border-radius: 10px; color: black; font-weight: 700; cursor: pointer; }
+        .cases-page { display: flex; flex-direction: column; gap: 0.8rem; height: calc(100vh - 110px); }
+        .cases-sidebar { background: var(--bg-card); border: 1px solid var(--border-green); border-radius: 15px; padding: 0.8rem; max-height: 130px; overflow-y: auto; }
+        .cases-sidebar h3 { color: var(--accent-green); margin-bottom: 0.5rem; font-size: 1rem; }
+        .new-case-btn { width: 100%; padding: 0.6rem; background: rgba(0, 255, 136, 0.1); border: 1px solid var(--accent-green); border-radius: 10px; color: var(--accent-green); font-weight: 700; cursor: pointer; margin-bottom: 0.5rem; }
+        .case-item { background: var(--bg-input); border: 1px solid var(--border-green); border-radius: 10px; padding: 0.6rem; margin-bottom: 0.5rem; cursor: pointer; }
+        .case-item.active { border-color: var(--accent-green); background: rgba(0, 255, 136, 0.1); }
+        .case-title { font-weight: 700; color: var(--accent-green); font-size: 0.9rem; }
+        .case-preview { font-size: 0.75rem; color: var(--text-secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .case-chat { background: var(--bg-card); border: 1px solid var(--border-green); border-radius: 15px; display: flex; flex-direction: column; height: 100%; }
+        .case-chat-header { padding: 0.8rem; border-bottom: 1px solid var(--border-green); }
+        .case-chat-header h2 { color: var(--accent-green); font-size: 1rem; }
+        .case-messages { flex: 1; padding: 0.8rem; overflow-y: auto; }
+        .case-input { padding: 0.8rem; border-top: 1px solid var(--border-green); display: flex; gap: 0.5rem; }
+        .case-input input { flex: 1; padding: 0.7rem; background: var(--bg-input); border: 1px solid var(--border-green); border-radius: 10px; color: white; }
+        .case-input button { padding: 0.7rem 1rem; background: var(--accent-green); border: none; border-radius: 10px; color: black; font-weight: 700; cursor: pointer; }
+        .close-case-btn { width: 100%; padding: 0.6rem; background: rgba(255, 85, 85, 0.1); border: 1px solid var(--danger); border-radius: 10px; color: var(--danger); font-weight: 700; cursor: pointer; }
+        .message { max-width: 85%; padding: 0.6rem; border-radius: 12px; margin-bottom: 0.5rem; font-size: 0.85rem; word-break: break-word; }
+        .message.incoming { background: var(--bg-input); align-self: flex-start; }
+        .message.outgoing { background: rgba(0, 255, 136, 0.15); align-self: flex-end; }
+        .message .sender { font-size: 0.65rem; color: var(--accent-green); margin-bottom: 0.2rem; cursor: pointer; }
+        .message .time { font-size: 0.55rem; color: var(--text-secondary); margin-top: 0.2rem; text-align: right; }
+        .page { display: none; animation: fadeIn 0.3s ease; }
+        .page.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @supports (padding: max(0px)) {
+            .navbar { padding-top: max(0.5rem, env(safe-area-inset-top)); }
+            .container { padding-top: max(95px, calc(95px + env(safe-area-inset-top))); }
+        }
+        ::-webkit-scrollbar { width: 3px; }
+        ::-webkit-scrollbar-track { background: var(--bg-input); }
+        ::-webkit-scrollbar-thumb { background: var(--accent-green); border-radius: 3px; }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar" id="navbar" style="display: none;">
+        <div class="nav-container">
+            <div class="nav-top">
+                <div class="logo" onclick="showPage('home')">hck<span>-forum</span></div>
+                <div class="user-info" id="userInfo">
+                    <span class="user-name" id="currentUserName" onclick="viewProfile(currentUser?.login)"></span>
+                    <span class="user-role" id="currentUserRole"></span>
+                    <span class="logout-btn" id="logoutBtn">Выйти</span>
+                </div>
+            </div>
+            <div class="nav-links-wrapper">
+                <div class="nav-links" id="navLinks">
+                    <a data-page="home">Главная</a>
+                    <a data-page="general">Чат</a>
+                    <a data-page="pm">ЛС</a>
+                    <a data-page="users">Люди</a>
+                    <a data-page="cases">Кейсы</a>
+                    <a data-page="profile">Профиль</a>
+                    <a data-page="admin" id="adminLink">Админка</a>
+                    <a data-page="verification" id="verifyLink">Верификация</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Страница входа/регистрации -->
+    <div id="loginPage" class="login-page">
+        <div class="login-container">
+            <h1>hck<span>-forum</span></h1>
+            <div class="login-subtitle">• точка сбора / online •</div>
+            <div class="login-quote">
+                <p>🔐 <strong>Верификация через Telegram</strong></p>
+                <p>После регистрации укажи свой @username в Telegram</p>
+                <p style="font-size: 0.7rem; margin-top: 0.5rem; color: var(--warning);">⚠️ Доступ будет открыт после подтверждения администратором</p>
+            </div>
+            <input type="text" class="login-input" id="loginInput" placeholder="Логин">
+            <input type="password" class="login-input" id="passwordInput" placeholder="Пароль">
+            <input type="text" class="login-input" id="tgUsernameInput" placeholder="@username в Telegram">
+            <button class="login-btn" id="loginBtn">Войти</button>
+            <button class="register-btn" id="registerBtn">Зарегистрироваться</button>
+            <div id="loginMessage" class="error-message"></div>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <div class="container" id="mainContainer" style="display: none;">
+        <!-- Главная -->
+        <div id="homePage" class="page">
+            <div class="posts-header">
+                <h1>hck-forum</h1>
+            </div>
+            <div id="createPostSection" class="create-post-section" style="display: none;">
+                <h2>Создать объявление</h2>
+                <div class="create-post-form">
+                    <textarea id="postContent" placeholder="Текст нового поста..."></textarea>
+                    <div class="file-upload">
+                        <label for="postImage">📎 Прикрепить фото</label>
+                        <input type="file" id="postImage" accept="image/*">
+                        <div class="file-name" id="fileName">Файл не выбран</div>
+                    </div>
+                    <button id="publishPostBtn">Опубликовать</button>
+                </div>
+            </div>
+            <div class="posts-section">
+                <h2>Объявления</h2>
+                <div class="posts-grid" id="postsList"></div>
+            </div>
+        </div>
+
+        <!-- Общий чат -->
+        <div id="generalPage" class="page">
+            <div class="general-chat-page">
+                <div class="general-chat-messages" id="generalMessages"></div>
+                <div class="general-chat-input">
+                    <input type="text" id="generalMessageInput" placeholder="Сообщение...">
+                    <button id="sendGeneralMessageBtn">Отправить</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Личные сообщения -->
+        <div id="pmPage" class="page">
+            <div class="pm-page">
+                <div class="pm-sidebar">
+                    <h3>Диалоги</h3>
+                    <div id="pmUsersList"></div>
+                </div>
+                <div class="pm-chat" id="pmChat" style="display: none;">
+                    <div class="pm-chat-header">
+                        <h2 id="pmChatHeader">Выберите собеседника</h2>
+                    </div>
+                    <div class="pm-messages" id="pmMessages"></div>
+                    <div class="pm-input">
+                        <input type="text" id="pmMessageInput" placeholder="Сообщение...">
+                        <button id="sendPmMessageBtn">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Пользователи -->
+        <div id="usersPage" class="page">
+            <div class="users-header">
+                <h1>Пользователи</h1>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="all">Все</button>
+                    <button class="filter-btn" data-filter="owner">Овнер</button>
+                    <button class="filter-btn" data-filter="tech">Тех админы</button>
+                    <button class="filter-btn" data-filter="seo">Сис админы</button>
+                    <button class="filter-btn" data-filter="moder">Модераторы</button>
+                    <button class="filter-btn" data-filter="user">Пользователи</button>
+                </div>
+            </div>
+            <div class="users-grid" id="usersList"></div>
+        </div>
+
+        <!-- Кейсы -->
+        <div id="casesPage" class="page">
+            <div class="cases-page">
+                <div class="cases-sidebar">
+                    <h3>Обращения</h3>
+                    <button class="new-case-btn" id="newCaseBtn">➕ Создать</button>
+                    <div id="casesList"></div>
+                </div>
+                <div class="case-chat" id="caseChat" style="display: none;">
+                    <div class="case-chat-header">
+                        <h2 id="caseChatTitle">Обращение</h2>
+                        <p id="caseChatStatus" style="font-size: 0.75rem;"></p>
+                    </div>
+                    <div class="case-messages" id="caseMessages"></div>
+                    <div class="case-input">
+                        <input type="text" id="caseMessageInput" placeholder="Сообщение...">
+                        <button id="sendCaseMessageBtn">Отправить</button>
+                    </div>
+                    <div class="case-actions">
+                        <button class="close-case-btn" id="closeCaseBtn">🔒 Закрыть</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Профиль -->
+        <div id="profilePage" class="page profile-page">
+            <div class="profile-header">
+                <div class="profile-avatar" id="profileAvatar" onclick="document.getElementById('avatarInput').click()">
+                    <img id="profileAvatarImg" src="" alt="Avatar" style="display: none;">
+                    <span id="profileAvatarText"></span>
+                    <div class="profile-avatar-overlay" id="avatarOverlay">Сменить аватар</div>
+                </div>
+                <div class="profile-info">
+                    <h2 id="profileName"></h2>
+                    <p id="profileRole"></p>
+                    <p id="profileJoined"></p>
+                    <p id="profileTg" style="font-size: 0.8rem; color: var(--accent-green);"></p>
+                    <div class="profile-stats">
+                        <div><div class="profile-stat-value" id="profilePostsCount">0</div><div class="profile-stat-label">Посты</div></div>
+                        <div><div class="profile-stat-value" id="profileMessagesCount">0</div><div class="profile-stat-label">Сообщ</div></div>
+                        <div><div class="profile-stat-value" id="profileCasesCount">0</div><div class="profile-stat-label">Кейсы</div></div>
+                    </div>
+                    <div class="profile-actions" id="profileActions"></div>
+                    <div class="avatar-upload" id="avatarUploadSection">
+                        <label for="avatarInput">📸 Выбрать фото</label>
+                        <input type="file" id="avatarInput" accept="image/*">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Админ панель -->
+        <div id="adminPage" class="page admin-page">
+            <div class="admin-header">
+                <h1>Админ панель</h1>
+                <p>Управление форумом</p>
+            </div>
+            <div class="admin-stats">
+                <div class="stat-card"><div class="stat-value" id="totalUsers">0</div><div class="stat-label">Пользователей</div></div>
+                <div class="stat-card"><div class="stat-value" id="totalPosts">0</div><div class="stat-label">Постов</div></div>
+                <div class="stat-card"><div class="stat-value" id="totalCases">0</div><div class="stat-label">Кейсов</div></div>
+                <div class="stat-card"><div class="stat-value" id="totalMessages">0</div><div class="stat-label">Сообщений</div></div>
+            </div>
+            <div class="admin-section">
+                <h2>Управление пользователями</h2>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table"><thead><tr><th>Аватар</th><th>Логин</th><th>Telegram</th><th>Роль</th><th>Действия</th></tr></thead>
+                    <tbody id="usersTableBody"></tbody></table>
+                </div>
+            </div>
+            <div class="admin-section">
+                <h2>Управление постами</h2>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table"><thead><tr><th>Автор</th><th>Текст</th><th>Дата</th><th>Действия</th></tr></thead>
+                    <tbody id="postsTableBody"></tbody></table>
+                </div>
+            </div>
+            <div class="admin-section">
+                <h2>Управление кейсами</h2>
+                <div style="overflow-x: auto;">
+                    <table class="admin-table"><thead><tr><th>Автор</th><th>Тема</th><th>Статус</th><th>Действия</th></tr></thead>
+                    <tbody id="casesTableBody"></tbody></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Страница верификации -->
+        <div id="verificationPage" class="page verification-page">
+            <div class="admin-header">
+                <h1>🔐 Верификация пользователей</h1>
+                <p>Здесь отображаются ожидающие подтверждения регистрации</p>
+            </div>
+            <div id="pendingList"></div>
+        </div>
+    </div>
+
+    <script>
+        // ========== ДАННЫЕ ==========
+        let users = JSON.parse(localStorage.getItem('users')) || [
+            { login: 'waxues', password: 'root', role: 'owner', avatar: null, joined: new Date().toISOString(), tgUsername: 'waxues' },
+            { login: 'tech', password: 'admin', role: 'tech', avatar: null, joined: new Date().toISOString(), tgUsername: 'tech' },
+            { login: 'seo', password: 'admin', role: 'seo', avatar: null, joined: new Date().toISOString(), tgUsername: 'seo' },
+            { login: 'moder1', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString(), tgUsername: 'moder1' },
+            { login: 'moder2', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString(), tgUsername: 'moder2' },
+            { login: 'moder3', password: 'admin', role: 'moder', avatar: null, joined: new Date().toISOString(), tgUsername: 'moder3' }
+        ];
+        
+        let pendingVerifications = JSON.parse(localStorage.getItem('pendingVerifications')) || [];
+        let posts = JSON.parse(localStorage.getItem('posts')) || [];
+        let generalMessages = JSON.parse(localStorage.getItem('generalMessages')) || [];
+        let privateMessages = JSON.parse(localStorage.getItem('privateMessages')) || {};
+        let cases = JSON.parse(localStorage.getItem('cases')) || [];
+
+        let currentUser = null;
+        let selectedPmUser = null;
+        let viewingProfile = null;
+        let selectedCase = null;
+        let currentFilter = 'all';
+
+        const savedUser = sessionStorage.getItem('currentUser');
+        if (savedUser) {
+            currentUser = JSON.parse(savedUser);
+        }
+
+        // ========== ФУНКЦИИ ВЕРИФИКАЦИИ ==========
+        function isLoginPending(login) {
+            return pendingVerifications.some(p => p.login === login);
+        }
+
+        function sendVerificationRequest(login, password, tgUsername) {
+            const requestId = Date.now().toString();
+            
+            pendingVerifications.push({
+                id: requestId,
+                login: login,
+                password: password,
+                tgUsername: tgUsername,
+                timestamp: new Date().toISOString(),
+                status: 'pending'
+            });
+            localStorage.setItem('pendingVerifications', JSON.stringify(pendingVerifications));
+            return requestId;
+        }
+
+        function approveVerification(requestId) {
+            const requestIndex = pendingVerifications.findIndex(r => r.id === requestId);
+            if (requestIndex === -1) return false;
+            
+            const request = pendingVerifications[requestIndex];
+            
+            if (users.find(u => u.login === request.login)) {
+                alert(`Пользователь ${request.login} уже существует!`);
+                pendingVerifications.splice(requestIndex, 1);
+                localStorage.setItem('pendingVerifications', JSON.stringify(pendingVerifications));
+                return false;
+            }
+            
+            users.push({
+                login: request.login,
+                password: request.password,
+                role: 'user',
+                avatar: null,
+                joined: new Date().toISOString(),
+                tgUsername: request.tgUsername
+            });
+            
+            pendingVerifications.splice(requestIndex, 1);
+            localStorage.setItem('pendingVerifications', JSON.stringify(pendingVerifications));
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            if (currentUser && (currentUser.role === 'owner' || currentUser.role === 'tech' || currentUser.role === 'seo' || currentUser.role === 'moder')) {
+                loadVerificationPage();
+                if (currentUser.role === 'owner') loadAdminPanel();
+            }
+            
+            alert(`✅ Пользователь ${request.login} добавлен! Теперь он может войти.`);
+            return true;
+        }
+        
+        function rejectVerification(requestId) {
+            const requestIndex = pendingVerifications.findIndex(r => r.id === requestId);
+            if (requestIndex === -1) return;
+            
+            const request = pendingVerifications[requestIndex];
+            pendingVerifications.splice(requestIndex, 1);
+            localStorage.setItem('pendingVerifications', JSON.stringify(pendingVerifications));
+            
+            if (currentUser && (currentUser.role === 'owner' || currentUser.role === 'tech' || currentUser.role === 'seo' || currentUser.role === 'moder')) {
+                loadVerificationPage();
+            }
+            
+            alert(`❌ Регистрация ${request.login} отклонена`);
+        }
+        
+        function loadVerificationPage() {
+            const container = document.getElementById('pendingList');
+            if (!container) return;
+            
+            if (pendingVerifications.length === 0) {
+                container.innerHTML = '<div class="empty-state">✨ Нет ожидающих подтверждения</div>';
+                return;
+            }
+            
+            container.innerHTML = pendingVerifications.map(req => `
+                <div class="pending-card">
+                    <div class="pending-header">
+                        <span class="pending-login">${escapeHtml(req.login)}</span>
+                        <span class="pending-tg">@${escapeHtml(req.tgUsername)}</span>
+                    </div>
+                    <div class="pending-time">📅 ${new Date(req.timestamp).toLocaleString()}</div>
+                    <div class="pending-actions">
+                        <button class="approve-btn" onclick="approveVerification('${req.id}')">✅ Разрешить</button>
+                        <button class="reject-btn" onclick="rejectVerification('${req.id}')">❌ Отклонить</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function saveUsers() { localStorage.setItem('users', JSON.stringify(users)); }
+        function savePosts() { localStorage.setItem('posts', JSON.stringify(posts)); }
+        function saveGeneralMessages() { localStorage.setItem('generalMessages', JSON.stringify(generalMessages)); }
+        function savePrivateMessages() { localStorage.setItem('privateMessages', JSON.stringify(privateMessages)); }
+        function saveCases() { localStorage.setItem('cases', JSON.stringify(cases)); }
+
+        function getRoleName(role) {
+            const roles = { 'owner': 'Овнер', 'tech': 'Тех админ', 'seo': 'Сис админ', 'moder': 'Модератор', 'user': 'Пользователь' };
+            return roles[role] || role;
+        }
+
+        // ========== ОСНОВНЫЕ ФУНКЦИИ ==========
+        function updateUI() {
+            const loginPage = document.getElementById('loginPage');
+            const navbar = document.getElementById('navbar');
+            const mainContainer = document.getElementById('mainContainer');
+            const adminLink = document.getElementById('adminLink');
+            const verifyLink = document.getElementById('verifyLink');
+
+            if (currentUser) {
+                loginPage.style.display = 'none';
+                navbar.style.display = 'block';
+                mainContainer.style.display = 'block';
+                
+                document.getElementById('currentUserName').textContent = currentUser.login;
+                const roleElement = document.getElementById('currentUserRole');
+                roleElement.textContent = getRoleName(currentUser.role);
+                roleElement.className = `user-role role-${currentUser.role}`;
+                
+                const canVerify = ['owner', 'tech', 'seo', 'moder'].includes(currentUser.role);
+                verifyLink.style.display = canVerify ? 'inline-block' : 'none';
+                adminLink.style.display = currentUser.role === 'owner' ? 'inline-block' : 'none';
+                document.getElementById('createPostSection').style.display = currentUser.role === 'owner' ? 'block' : 'none';
+
+                showPage('home');
+                loadPosts();
+                loadGeneralMessages();
+                loadUsersList();
+                loadPmUsers();
+                loadCasesList();
+            } else {
+                loginPage.style.display = 'flex';
+                navbar.style.display = 'none';
+                mainContainer.style.display = 'none';
+            }
+        }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            const targetPage = document.getElementById(pageId + 'Page');
+            if (targetPage) targetPage.classList.add('active');
+            
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.dataset.page === pageId) link.classList.add('active');
+            });
+
+            if (pageId === 'users') { currentFilter = 'all'; loadUsersList(); }
+            if (pageId === 'general') loadGeneralMessages();
+            if (pageId === 'pm') loadPmUsers();
+            if (pageId === 'cases') loadCasesList();
+            if (pageId === 'profile') viewProfile(currentUser.login);
+            if (pageId === 'admin' && currentUser?.role === 'owner') loadAdminPanel();
+            if (pageId === 'verification' && (currentUser?.role === 'owner' || currentUser?.role === 'tech' || currentUser?.role === 'seo' || currentUser?.role === 'moder')) {
+                loadVerificationPage();
+            } else if (pageId === 'verification') {
+                alert('У вас нет доступа к верификации');
+                showPage('home');
+            }
+        }
+
+        function loadPosts() {
+            const postsList = document.getElementById('postsList');
+            if (!postsList) return;
+            
+            postsList.innerHTML = posts.sort((a, b) => new Date(b.date) - new Date(a.date)).map(post => `
+                <div class="post-card">
+                    <div class="post-header">
+                        <span class="post-author" onclick="viewProfile('${post.author}')">${escapeHtml(post.author)}</span>
+                        <span class="post-date">${new Date(post.date).toLocaleString()}</span>
+                    </div>
+                    <div class="post-content">${escapeHtml(post.content)}</div>
+                    ${post.image ? `<div class="post-image"><img src="${post.image}" alt="Post image"></div>` : ''}
+                    ${currentUser?.role === 'owner' ? `<div><button class="delete-post-btn" onclick="deletePost('${post.id}')">Удалить</button></div>` : ''}
+                </div>
+            `).join('');
+        }
+
+        window.deletePost = function(postId) {
+            if (currentUser?.role !== 'owner') return;
+            posts = posts.filter(p => p.id !== postId);
+            savePosts();
+            loadPosts();
+            if (currentUser?.role === 'owner') loadAdminPanel();
+        };
+
+        function loadUsersList() {
+            const usersList = document.getElementById('usersList');
+            if (!usersList) return;
+            
+            let filteredUsers = users.filter(u => u.login !== currentUser?.login);
+            if (currentFilter !== 'all') {
+                filteredUsers = filteredUsers.filter(u => u.role === currentFilter);
+            }
+            
+            usersList.innerHTML = filteredUsers.map(user => `
+                <div class="user-card">
+                    <div class="user-avatar" onclick="viewProfile('${user.login}')">
+                        ${user.avatar ? `<img src="${user.avatar}" alt="Avatar">` : user.login[0].toUpperCase()}
+                    </div>
+                    <div class="user-info-card" onclick="viewProfile('${user.login}')">
+                        <h3>${escapeHtml(user.login)}</h3>
+                        <p>${getRoleName(user.role)}</p>
+                        ${user.tgUsername ? `<p style="font-size: 0.65rem;">@${escapeHtml(user.tgUsername)}</p>` : ''}
+                    </div>
+                    <div class="message-btn" onclick="startPrivateChat('${user.login}')">💬</div>
+                </div>
+            `).join('');
+        }
+
+        window.viewProfile = function(login) {
+            const user = users.find(u => u.login === login);
+            if (!user) return;
+
+            viewingProfile = user;
+            showPage('profile');
+            
+            document.getElementById('profileName').textContent = user.login;
+            document.getElementById('profileRole').textContent = getRoleName(user.role);
+            document.getElementById('profileJoined').textContent = user.joined ? `С ${new Date(user.joined).toLocaleDateString()}` : '';
+            document.getElementById('profileTg').textContent = user.tgUsername ? `TG: @${user.tgUsername}` : '';
+            
+            const userPosts = posts.filter(p => p.author === user.login).length;
+            const userMessages = generalMessages.filter(m => m.from === user.login).length;
+            const userCases = cases.filter(c => c.user === user.login).length;
+            
+            document.getElementById('profilePostsCount').textContent = userPosts;
+            document.getElementById('profileMessagesCount').textContent = userMessages;
+            document.getElementById('profileCasesCount').textContent = userCases;
+            
+            const avatarImg = document.getElementById('profileAvatarImg');
+            const avatarText = document.getElementById('profileAvatarText');
+            
+            if (user.avatar) {
+                avatarImg.src = user.avatar;
+                avatarImg.style.display = 'block';
+                avatarText.style.display = 'none';
+            } else {
+                avatarImg.style.display = 'none';
+                avatarText.style.display = 'block';
+                avatarText.textContent = user.login[0].toUpperCase();
+            }
+
+            document.getElementById('avatarUploadSection').style.display = currentUser?.login === login ? 'block' : 'none';
+            document.getElementById('avatarOverlay').style.display = currentUser?.login === login ? 'block' : 'none';
+
+            const actionsContainer = document.getElementById('profileActions');
+            let actionsHTML = '';
+
+            if (currentUser?.login !== login) {
+                actionsHTML += `<button class="profile-action-btn profile-message-btn" onclick="startPrivateChat('${login}')">💬 Написать</button>`;
+            }
+
+            const canBan = ['owner', 'tech', 'seo'].includes(currentUser?.role);
+            if (canBan && currentUser?.login !== login && !['owner', 'tech', 'seo'].includes(user.role)) {
+                actionsHTML += `<button class="profile-action-btn profile-ban-btn" onclick="banUser('${login}')">⛔ Забанить</button>`;
+            }
+
+            actionsContainer.innerHTML = actionsHTML;
+        };
+
+        window.banUser = function(login) {
+            if (confirm(`Забанить пользователя ${login}?`)) {
+                users = users.filter(u => u.login !== login);
+                saveUsers();
+                generalMessages = generalMessages.filter(m => m.from !== login);
+                saveGeneralMessages();
+                alert(`Пользователь ${login} забанен`);
+                if (currentUser?.role === 'owner') loadAdminPanel();
+                showPage('users');
+                loadUsersList();
+            }
+        };
+
+        document.getElementById('avatarInput')?.addEventListener('change', function(e) {
+            if (!currentUser) return;
+            const file = e.target.files[0];
+            if (!file) return;
+            if (file.size > 2 * 1024 * 1024) {
+                alert('Файл слишком большой. Максимальный размер 2MB');
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const userIndex = users.findIndex(u => u.login === currentUser.login);
+                if (userIndex !== -1) {
+                    users[userIndex].avatar = e.target.result;
+                    saveUsers();
+                    currentUser.avatar = e.target.result;
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    const avatarImg = document.getElementById('profileAvatarImg');
+                    const avatarText = document.getElementById('profileAvatarText');
+                    avatarImg.src = e.target.result;
+                    avatarImg.style.display = 'block';
+                    avatarText.style.display = 'none';
+                    loadUsersList();
+                    loadPmUsers();
+                    alert('✅ Аватар обновлен!');
+                }
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function loadPmUsers() {
+            if (!currentUser) return;
+            const pmUsersList = document.getElementById('pmUsersList');
+            if (!pmUsersList) return;
+
+            const conversations = new Set();
+            Object.keys(privateMessages).forEach(key => {
+                const [user1, user2] = key.split('_');
+                if (user1 === currentUser.login) conversations.add(user2);
+                if (user2 === currentUser.login) conversations.add(user1);
+            });
+
+            pmUsersList.innerHTML = Array.from(conversations).map(login => {
+                const user = users.find(u => u.login === login);
+                if (!user) return '';
+                return `
+                    <div class="pm-user-item ${selectedPmUser === login ? 'active' : ''}" onclick="selectPmUser('${login}')">
+                        <div class="pm-user-avatar">${user.avatar ? `<img src="${user.avatar}">` : login[0].toUpperCase()}</div>
+                        <span class="pm-user-name">${escapeHtml(login)}</span>
+                    </div>
+                `;
+            }).join('') || '<p style="color: var(--text-secondary); padding: 0.5rem;">Нет диалогов</p>';
+        }
+
+        window.selectPmUser = function(login) {
+            selectedPmUser = login;
+            document.getElementById('pmChat').style.display = 'flex';
+            document.getElementById('pmChatHeader').textContent = `Чат с ${login}`;
+            loadPrivateMessages(login);
+        };
+
+        window.startPrivateChat = function(login) {
+            selectedPmUser = login;
+            showPage('pm');
+            loadPmUsers();
+            setTimeout(() => selectPmUser(login), 100);
+        };
+
+        function loadPrivateMessages(otherUser) {
+            if (!currentUser || !otherUser) return;
+            const key = `${currentUser.login}_${otherUser}`;
+            const altKey = `${otherUser}_${currentUser.login}`;
+            const messages = privateMessages[key] || privateMessages[altKey] || [];
+
+            const container = document.getElementById('pmMessages');
+            if (!container) return;
+            
+            container.innerHTML = messages.map(msg => `
+                <div class="message ${msg.from === currentUser.login ? 'outgoing' : 'incoming'}">
+                    <div class="sender" onclick="viewProfile('${msg.from}')">${escapeHtml(msg.from)}</div>
+                    <div>${escapeHtml(msg.text)}</div>
+                    <div class="time">${new Date(msg.timestamp).toLocaleTimeString()}</div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendPrivateMessage() {
+            if (!currentUser || !selectedPmUser) return;
+            const input = document.getElementById('pmMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const key = `${currentUser.login}_${selectedPmUser}`;
+            if (!privateMessages[key]) privateMessages[key] = [];
+
+            privateMessages[key].push({
+                from: currentUser.login,
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+
+            savePrivateMessages();
+            input.value = '';
+            loadPrivateMessages(selectedPmUser);
+            loadPmUsers();
+        }
+
+        function loadGeneralMessages() {
+            const container = document.getElementById('generalMessages');
+            if (!container) return;
+            
+            container.innerHTML = generalMessages.map(msg => `
+                <div class="message ${msg.from === currentUser?.login ? 'outgoing' : 'incoming'}">
+                    <div class="sender" onclick="viewProfile('${msg.from}')">${escapeHtml(msg.from)}</div>
+                    <div>${escapeHtml(msg.text)}</div>
+                    <div class="time">${new Date(msg.timestamp).toLocaleTimeString()}</div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendGeneralMessage() {
+            const input = document.getElementById('generalMessageInput');
+            const text = input.value.trim();
+            if (!text || !currentUser) return;
+
+            generalMessages.push({
+                from: currentUser.login,
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+
+            saveGeneralMessages();
+            input.value = '';
+            loadGeneralMessages();
+        }
+
+        function loadCasesList() {
+            const casesList = document.getElementById('casesList');
+            if (!casesList) return;
+
+            let visibleCases = cases;
+            if (currentUser.role === 'user') {
+                visibleCases = cases.filter(c => c.user === currentUser.login);
+            }
+
+            casesList.innerHTML = visibleCases.map(c => `
+                <div class="case-item ${selectedCase?.id === c.id ? 'active' : ''}" onclick="selectCase('${c.id}')">
+                    <div class="case-title">${escapeHtml(c.title)}</div>
+                    <div class="case-preview">${c.messages[c.messages.length-1]?.text?.substring(0, 30) || ''}</div>
+                </div>
+            `).join('') || '<p style="color: var(--text-secondary); padding: 0.5rem;">Нет обращений</p>';
+        }
+
+        window.selectCase = function(caseId) {
+            selectedCase = cases.find(c => c.id === caseId);
+            if (!selectedCase) return;
+
+            document.getElementById('caseChat').style.display = 'flex';
+            document.getElementById('caseChatTitle').textContent = selectedCase.title;
+            document.getElementById('caseChatStatus').textContent = `${selectedCase.status === 'open' ? '🟢 Открыт' : '🔴 Закрыт'} • ${selectedCase.user}`;
+            loadCaseMessages();
+
+            const canEdit = currentUser.role !== 'user' || selectedCase.user === currentUser.login;
+            document.getElementById('caseInputSection')?.setAttribute('style', canEdit && selectedCase.status === 'open' ? 'display: flex;' : 'display: none;');
+            document.getElementById('caseActions')?.setAttribute('style', (currentUser.role !== 'user' && selectedCase.status === 'open') ? 'display: block;' : 'display: none;');
+        };
+
+        function loadCaseMessages() {
+            if (!selectedCase) return;
+            const container = document.getElementById('caseMessages');
+            container.innerHTML = selectedCase.messages.map(msg => `
+                <div class="message ${msg.from === currentUser?.login ? 'outgoing' : 'incoming'}">
+                    <div class="sender" onclick="viewProfile('${msg.from}')">${escapeHtml(msg.from)}</div>
+                    <div>${escapeHtml(msg.text)}</div>
+                    <div class="time">${new Date(msg.timestamp).toLocaleString()}</div>
+                </div>
+            `).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendCaseMessage() {
+            if (!selectedCase || selectedCase.status === 'closed') return;
+            const input = document.getElementById('caseMessageInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            selectedCase.messages.push({
+                from: currentUser.login,
+                text: text,
+                timestamp: new Date().toISOString()
+            });
+
+            saveCases();
+            input.value = '';
+            loadCaseMessages();
+            loadCasesList();
+        }
+
+        document.getElementById('newCaseBtn')?.addEventListener('click', () => {
+            if (!currentUser) return;
+            const title = prompt('Кратко опишите проблему:');
+            if (!title) return;
+
+            cases.push({
+                id: Date.now().toString(),
+                user: currentUser.login,
+                title: title,
+                messages: [{ from: currentUser.login, text: 'Создано новое обращение', timestamp: new Date().toISOString() }],
+                status: 'open',
+                createdAt: new Date().toISOString()
+            });
+            saveCases();
+            loadCasesList();
+            selectCase(cases[cases.length-1].id);
+        });
+
+        document.getElementById('closeCaseBtn')?.addEventListener('click', () => {
+            if (!selectedCase || currentUser.role === 'user') return;
+            selectedCase.status = 'closed';
+            saveCases();
+            loadCasesList();
+            selectCase(selectedCase.id);
+        });
+
+        function loadAdminPanel() {
+            if (currentUser?.role !== 'owner') return;
+
+            document.getElementById('totalUsers').textContent = users.length;
+            document.getElementById('totalPosts').textContent = posts.length;
+            document.getElementById('totalCases').textContent = cases.length;
+            document.getElementById('totalMessages').textContent = generalMessages.length + Object.keys(privateMessages).length;
+
+            const usersTableBody = document.getElementById('usersTableBody');
+            usersTableBody.innerHTML = users.map(user => `
+                <tr>
+                    <td>${user.avatar ? `<img src="${user.avatar}" class="user-avatar-small">` : '📷'}</td>
+                    <td>${escapeHtml(user.login)}</td>
+                    <td>${user.tgUsername ? `@${escapeHtml(user.tgUsername)}` : '—'}</td>
+                    <td>
+                        <div class="role-checkbox-group">
+                            ${user.login !== 'waxues' ? `
+                                <label class="role-checkbox owner"><input type="radio" name="role_${user.login}" value="owner" ${user.role === 'owner' ? 'checked' : ''} onchange="changeUserRole('${user.login}', 'owner')">Овнер</label>
+                                <label class="role-checkbox tech"><input type="radio" name="role_${user.login}" value="tech" ${user.role === 'tech' ? 'checked' : ''} onchange="changeUserRole('${user.login}', 'tech')">Тех</label>
+                                <label class="role-checkbox seo"><input type="radio" name="role_${user.login}" value="seo" ${user.role === 'seo' ? 'checked' : ''} onchange="changeUserRole('${user.login}', 'seo')">Сис</label>
+                                <label class="role-checkbox moder"><input type="radio" name="role_${user.login}" value="moder" ${user.role === 'moder' ? 'checked' : ''} onchange="changeUserRole('${user.login}', 'moder')">Модер</label>
+                                <label class="role-checkbox user"><input type="radio" name="role_${user.login}" value="user" ${user.role === 'user' ? 'checked' : ''} onchange="changeUserRole('${user.login}', 'user')">Юзер</label>
+                            ` : '<span style="color: var(--accent-green);">👑 Владелец</span>'}
+                        </div>
+                    </td>
+                    <td>${user.login !== 'waxues' ? `<button class="admin-btn" onclick="banUser('${user.login}')">Забанить</button>` : '—'}</td>
+                </tr>
+            `).join('');
+
+            const postsTableBody = document.getElementById('postsTableBody');
+            postsTableBody.innerHTML = posts.map(post => `
+                <tr><td>${escapeHtml(post.author)}</td><td>${escapeHtml(post.content.substring(0, 50))}${post.content.length > 50 ? '...' : ''}</td><td>${new Date(post.date).toLocaleDateString()}</td><td><button class="admin-btn" onclick="deletePost('${post.id}')">Удалить</button></td></tr>
+            `).join('');
+
+            const casesTableBody = document.getElementById('casesTableBody');
+            casesTableBody.innerHTML = cases.map(c => `
+                <tr><td>${escapeHtml(c.user)}</td><td>${escapeHtml(c.title)}</td><td>${c.status === 'open' ? '🟢 Открыт' : '🔴 Закрыт'}</td><td><button class="admin-btn ${c.status === 'open' ? 'green' : ''}" onclick="toggleCaseStatus('${c.id}')">${c.status === 'open' ? 'Закрыть' : 'Открыть'}</button></td></tr>
+            `).join('');
+        }
+
+        window.changeUserRole = function(login, newRole) {
+            if (login === 'waxues') return;
+            const userIndex = users.findIndex(u => u.login === login);
+            if (userIndex !== -1) {
+                users[userIndex].role = newRole;
+                saveUsers();
+                loadAdminPanel();
+                loadUsersList();
+                loadPmUsers();
+                if (viewingProfile?.login === login) viewProfile(login);
+            }
+        };
+
+        window.toggleCaseStatus = function(caseId) {
+            const caseIndex = cases.findIndex(c => c.id === caseId);
+            if (caseIndex !== -1) {
+                cases[caseIndex].status = cases[caseIndex].status === 'open' ? 'closed' : 'open';
+                saveCases();
+                loadAdminPanel();
+                if (selectedCase?.id === caseId) selectCase(caseId);
+            }
+        };
+
+        // ========== ИНИЦИАЛИЗАЦИЯ ==========
+        function init() {
+            if (posts.length === 0) {
+                posts.push({ id: Date.now().toString(), author: 'waxues', content: 'Добро пожаловать на hck-forum! 🔥', date: new Date().toISOString() });
+                savePosts();
+            }
+            updateUI();
+        }
+
+        // ========== ОБРАБОТЧИКИ СОБЫТИЙ ==========
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.nav-links a')) {
+                e.preventDefault();
+                showPage(e.target.dataset.page);
+            }
+
+            if (e.target.id === 'loginBtn') {
+                const login = document.getElementById('loginInput').value.trim();
+                const password = document.getElementById('passwordInput').value;
+                const user = users.find(u => u.login === login && u.password === password);
+                
+                if (user) {
+                    currentUser = { login: user.login, role: user.role, avatar: user.avatar };
+                    sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+                    updateUI();
+                } else if (isLoginPending(login)) {
+                    document.getElementById('loginMessage').textContent = '⏳ Ваша регистрация ожидает подтверждения администратором';
+                    document.getElementById('loginMessage').className = 'warning-message';
+                } else {
+                    document.getElementById('loginMessage').textContent = '❌ Неверный логин или пароль';
+                    document.getElementById('loginMessage').className = 'error-message';
+                }
+            }
+
+            if (e.target.id === 'registerBtn') {
+                const login = document.getElementById('loginInput').value.trim();
+                const password = document.getElementById('passwordInput').value;
+                let tgUsername = document.getElementById('tgUsernameInput').value.trim().replace('@', '');
+                
+                if (!login || !password || !tgUsername) {
+                    document.getElementById('loginMessage').textContent = '❌ Заполните все поля';
+                    document.getElementById('loginMessage').className = 'error-message';
+                    return;
+                }
+                
+                if (users.find(u => u.login === login)) {
+                    document.getElementById('loginMessage').textContent = '❌ Пользователь уже существует';
+                    document.getElementById('loginMessage').className = 'error-message';
+                    return;
+                }
+                
+                if (isLoginPending(login)) {
+                    document.getElementById('loginMessage').textContent = '⏳ Запрос уже отправлен! Ожидайте подтверждения';
+                    document.getElementById('loginMessage').className = 'warning-message';
+                    return;
+                }
+                
+                sendVerificationRequest(login, password, tgUsername);
+                document.getElementById('loginMessage').textContent = '✅ Запрос отправлен! Ожидайте подтверждения от администратора.';
+                document.getElementById('loginMessage').className = 'success-message';
+                document.getElementById('loginInput').value = '';
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('tgUsernameInput').value = '';
+                
+                setTimeout(() => {
+                    if (document.getElementById('loginMessage').textContent.includes('Запрос отправлен')) {
+                        document.getElementById('loginMessage').textContent = '';
+                    }
+                }, 5000);
+            }
+
+            if (e.target.id === 'logoutBtn') {
+                currentUser = null;
+                sessionStorage.removeItem('currentUser');
+                updateUI();
+            }
+
+            if (e.target.id === 'publishPostBtn') {
+                if (!currentUser || currentUser.role !== 'owner') {
+                    alert('Только овнер может создавать посты');
+                    return;
+                }
+                const content = document.getElementById('postContent').value.trim();
+                if (!content) { alert('Введите текст поста'); return; }
+
+                const fileInput = document.getElementById('postImage');
+                if (fileInput.files && fileInput.files[0]) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        posts.push({ id: Date.now().toString(), author: currentUser.login, content: content, image: e.target.result, date: new Date().toISOString() });
+                        savePosts();
+                        document.getElementById('postContent').value = '';
+                        fileInput.value = '';
+                        document.getElementById('fileName').textContent = 'Файл не выбран';
+                        loadPosts();
+                        if (currentUser?.role === 'owner') loadAdminPanel();
+                        alert('Пост опубликован!');
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+                } else {
+                    posts.push({ id: Date.now().toString(), author: currentUser.login, content: content, date: new Date().toISOString() });
+                    savePosts();
+                    document.getElementById('postContent').value = '';
+                    loadPosts();
+                    alert('Пост опубликован!');
+                }
+            }
+
+            if (e.target.id === 'sendGeneralMessageBtn') sendGeneralMessage();
+            if (e.target.id === 'sendPmMessageBtn') sendPrivateMessage();
+            if (e.target.id === 'sendCaseMessageBtn') sendCaseMessage();
+        });
+
+        document.getElementById('postImage')?.addEventListener('change', (e) => {
+            document.getElementById('fileName').textContent = e.target.files[0]?.name || 'Файл не выбран';
+        });
+
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentFilter = this.dataset.filter;
+                loadUsersList();
+            });
+        });
+
+        document.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                if (e.target.id === 'generalMessageInput') { sendGeneralMessage(); e.preventDefault(); }
+                if (e.target.id === 'pmMessageInput') { sendPrivateMessage(); e.preventDefault(); }
+                if (e.target.id === 'caseMessageInput') { sendCaseMessage(); e.preventDefault(); }
+            }
+        });
+
+        window.approveVerification = approveVerification;
+        window.rejectVerification = rejectVerification;
+        window.viewProfile = viewProfile;
+        window.startPrivateChat = startPrivateChat;
+        window.deletePost = deletePost;
+        window.banUser = banUser;
+        window.changeUserRole = changeUserRole;
+        window.toggleCaseStatus = toggleCaseStatus;
+        window.selectPmUser = selectPmUser;
+        window.selectCase = selectCase;
+
+        init();
+    </script>
+</body>
+</html>
+-border-green);
+        }
+
+        /* Страница входа */
+        .login-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-dark);
         }
 
         .login-container {
